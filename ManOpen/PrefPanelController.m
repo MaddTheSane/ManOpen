@@ -444,7 +444,7 @@ static NSString *ManPathArrayKey = @"manPathArray";
 	[panel beginSheetModalForWindow:[self window] completionHandler:^(NSInteger result) {
 		if (result == NSOKButton) {
 			NSArray *urls = [panel URLs];
-			NSUInteger i, count = [urls count];
+			NSUInteger count = [urls count];
 			NSMutableArray *paths = [NSMutableArray arrayWithCapacity:count];
 			
 			for (NSURL *url in urls) {

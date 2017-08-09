@@ -100,7 +100,7 @@
 	<key>CFBundleGetInfoString</key>
 	<string>ManOpen 2.6.4 © 2012 Carl Lindberg, 2010 Jan Weiß</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.clindberg.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
