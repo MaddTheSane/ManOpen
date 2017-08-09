@@ -60,8 +60,9 @@ NSString *EscapePath(NSString *path, BOOL addSurroundingQuotes)
 		 * early as possible.  If the command-line tool still has problems
 		 * connecting, we may be able to do this whole thing in main()...
 		 */
-		
-		NSConnection *connection = [NSConnection new];
+        
+        static NSConnection *connection;
+		connection = [NSConnection new];
 		[connection registerName:@"ManOpenApp"];
 		[connection setRootObject:self];
 		
