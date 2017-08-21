@@ -56,6 +56,27 @@ class ManDocumentController: NSDocumentController, NSApplicationDelegate {
 	fileprivate var nibObjects = [AnyObject]()
 	private var bridge: ManBridgeCallback? = nil
 	
+	private final class ManOpenXPC: NSObject, ManOpenProtocol {
+		weak var controller: ManDocumentController?
+		func openName(_ name: String, section: String?, manPath: String?, forceToFront force: Bool) {
+			runOnMainThreadAsync {
+				self.controller?.openName(name, section: section, manPath: manPath, forceToFront: force)
+			}
+		}
+		
+		func openApropos(_ apropos: String, manPath: String?, forceToFront force: Bool) {
+			runOnMainThreadAsync {
+				self.controller?.openApropos(apropos, manPath: manPath, forceToFront: force)
+			}
+		}
+		
+		func openFile(_ filename: String, forceToFront force: Bool) {
+			runOnMainThreadAsync {
+				self.controller?.openFile(filename, forceToFront: force)
+			}
+		}
+	}
+	
 	func ensureActive() {
 		if !NSApplication.shared.isActive {
 			NSApplication.shared.activate(ignoringOtherApps: true)
@@ -321,6 +342,15 @@ class ManDocumentController: NSDocumentController, NSApplicationDelegate {
 		}
 		
 		(helpScrollView.contentView.documentView as! NSTextView).readRTFD(fromFile: helpPath!.path)
+		
+		DispatchQueue.global().async {
+			// Set up the one NSXPCListener for this service. It will handle all incoming connections.
+			let listener = NSXPCListener.anonymous()
+			listener.delegate = self
+			
+			// Resuming the serviceListener starts this service. This method does not return.
+			listener.resume()
+		}
 	}
 	
 	@discardableResult
@@ -593,6 +623,27 @@ class ManDocumentController: NSDocumentController, NSApplicationDelegate {
 			let pboardString = pboard.string(forType: .string) {
 			openApropos(pboardString)
 		}
+	}
+}
+
+extension ManDocumentController: NSXPCListenerDelegate {
+	func listener(_ listener: NSXPCListener, shouldAcceptNewConnection newConnection: NSXPCConnection) -> Bool {
+		// This method is where the NSXPCListener configures, accepts, and resumes a new incoming NSXPCConnection.
+		
+		// Configure the connection.
+		// First, set the interface that the exported object implements.
+		newConnection.exportedInterface = NSXPCInterface(with: ManOpenProtocol.self)
+		
+		// Next, set the object that the connection exports. All messages sent on the connection to this service will be sent to the exported object to handle. The connection retains the exported object.
+		let exportedObject = ManOpenXPC()
+		exportedObject.controller = self
+		newConnection.exportedObject = exportedObject
+		
+		// Resuming the connection allows the system to deliver more incoming messages.
+		newConnection.resume()
+		
+		// Returning YES from this method tells the system that you have accepted this connection. If you want to reject the connection for some reason, call -invalidate on the connection and return NO.
+		return true;
 	}
 }
 

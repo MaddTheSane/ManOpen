@@ -39,10 +39,8 @@ int main (int argc, char * const *argv)
         BOOL              forceToFront = YES;
         NSInteger         argIndex;
         char              c;
-        NSInteger         maxConnectTries;
-        NSInteger         connectCount;
+        NSXPCConnection   *_connectionToService;
         NSMutableArray<NSString*>   *files = [[NSMutableArray alloc] init];
-        NSDistantObject<ManOpen>    *server;
 
         while ((c = getopt(argc,argv,"hbm:M:f:kaCcw")) != EOF)
         {
@@ -121,45 +119,13 @@ int main (int argc, char * const *argv)
             }
         }
         
-        /*
-         * MacOS X Beta seems to take a little longer to start the app, so we try up
-         * to three times with sleep()s in between to give it a chance. First check
-         * to see if there's a version running though.  MacOS X 10.0 takes even longer,
-         * so up it to 8 tries.
-         */
-        maxConnectTries = 8;
-        connectCount = 0;
-        
-        do {
-            /* Try to connect to a running version... */
-            server = (NSDistantObject <ManOpen>*)[NSConnection rootProxyForConnectionWithRegisteredName:@"ManOpenApp" host:nil];
-            
-            if (server == nil) {
-                /*
-                 * Let Workspace try to start the app, and wait until it's up. If
-                 * launchApplication returns NO, then Workspace doesn't know about
-                 * the app, so there's no reason to keep waiting, and we bail out.
-                 */
-                if (connectCount == 0) {
-                    if (![[NSWorkspace sharedWorkspace] launchApplication:@"ManOpen"])
-                        maxConnectTries = 0;
-                }
-                
-                [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:1.0]];
-            }
-        } while (server == nil && connectCount++ < maxConnectTries);
-        
-        if (server == nil)
-        {
-            fprintf(stderr,"Could not open connection to ManOpen\n");
-            return 1;
-        }
-        
-        [server setProtocolForProxy:@protocol(ManOpen)];
-        
+        _connectionToService = [[NSXPCConnection alloc] initWithServiceName:@"org.clindberg.ManOpen"];
+        _connectionToService.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(ManOpen)];
+        [_connectionToService resume];
+
         for (NSString *fileName in files)
         {
-            [server openFile:fileName forceToFront:forceToFront];
+            [[_connectionToService remoteObjectProxy] openFile:fileName forceToFront:forceToFront];
         }
         
         if (manPath == nil && getenv("MANPATH") != NULL)
@@ -169,12 +135,13 @@ int main (int argc, char * const *argv)
         {
             NSString *currFile = MakeNSStringFromPath(argv[argIndex]);
             if (aproposMode) {
-                [server openApropos:currFile manPath:manPath forceToFront:forceToFront];
+                [[_connectionToService remoteObjectProxy] openApropos:currFile manPath:manPath forceToFront:forceToFront];
             } else {
-                [server openName:currFile section:section manPath:manPath forceToFront:forceToFront];
+                [[_connectionToService remoteObjectProxy] openName:currFile section:section manPath:manPath forceToFront:forceToFront];
             }
         }
         
+        [_connectionToService invalidate];
         return 0;
     }
 }

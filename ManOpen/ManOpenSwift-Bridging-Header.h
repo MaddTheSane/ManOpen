@@ -4,3 +4,4 @@
 
 #import "NSData+Utils.h"
 #import "ManNotificationCallback.h"
+#import "ManOpenProtocol.h"

@@ -8,6 +8,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+NS_SWIFT_NAME(ManOpenProtocol)
 @protocol ManOpen <NSObject>
 
 - (oneway void)openName:(bycopy NSString *)name section:(bycopy nullable NSString *)section manPath:(bycopy nullable NSString *)manPath forceToFront:(BOOL)force;
