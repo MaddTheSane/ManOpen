@@ -29,6 +29,9 @@
 		55182E1019C0BACA0016128A /* ManDocumentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B880BA19BEB80E0026FCF9 /* ManDocumentController.swift */; };
 		553A5B2519BFEDD7003D74A9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E802A1188237F000037AF6 /* Cocoa.framework */; };
 		553A5B2619BFEDF6003D74A9 /* NSData+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = D39278FA0821FFA400376676 /* NSData+Utils.m */; };
+		555CF79C1F4B65310032FF80 /* ManOpenXPC.m in Sources */ = {isa = PBXBuildFile; fileRef = 555CF79B1F4B65310032FF80 /* ManOpenXPC.m */; };
+		555CF79E1F4B65310032FF80 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 555CF79D1F4B65310032FF80 /* main.m */; };
+		555CF7A21F4B65310032FF80 /* ManOpenXPC.xpc in Embed XPC Services */ = {isa = PBXBuildFile; fileRef = 555CF7971F4B65310032FF80 /* ManOpenXPC.xpc */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5567E0561A7D615E005013B3 /* ManNotificationCallback.m in Sources */ = {isa = PBXBuildFile; fileRef = 5567E0551A7D615E005013B3 /* ManNotificationCallback.m */; };
 		557AFAF61A800C4F008BDF46 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 557AFAF81A800C4F008BDF46 /* Localizable.strings */; };
 		557AFB4B1A801CD8008BDF46 /* SwiftAdditions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 557AFB401A801CC8008BDF46 /* SwiftAdditions.framework */; };
@@ -75,6 +78,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 55E11DEB1AE7114000815555;
 			remoteInfo = SwiftAudioAdditionsTests;
+		};
+		555CF7A01F4B65310032FF80 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D39279890821FFA400376676 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 555CF7961F4B65310032FF80;
+			remoteInfo = ManOpenXPC;
 		};
 		557AFB3F1A801CC8008BDF46 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -162,6 +172,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/XPCServices";
 			dstSubfolderSpec = 16;
 			files = (
+				555CF7A21F4B65310032FF80 /* ManOpenXPC.xpc in Embed XPC Services */,
 			);
 			name = "Embed XPC Services";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -209,6 +220,12 @@
 		5553E22018821265003C2DBF /* openman-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "openman-Info.plist"; sourceTree = "<group>"; };
 		5553E22418821455003C2DBF /* cat2html-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "cat2html-Info.plist"; sourceTree = "<group>"; };
 		5553E226188214B9003C2DBF /* cat2rtf-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "cat2rtf-Info.plist"; sourceTree = "<group>"; };
+		555CF7971F4B65310032FF80 /* ManOpenXPC.xpc */ = {isa = PBXFileReference; explicitFileType = "wrapper.xpc-service"; includeInIndex = 0; path = ManOpenXPC.xpc; sourceTree = BUILT_PRODUCTS_DIR; };
+		555CF7991F4B65310032FF80 /* ManOpenXPCProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ManOpenXPCProtocol.h; sourceTree = "<group>"; };
+		555CF79A1F4B65310032FF80 /* ManOpenXPC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ManOpenXPC.h; sourceTree = "<group>"; };
+		555CF79B1F4B65310032FF80 /* ManOpenXPC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ManOpenXPC.m; sourceTree = "<group>"; };
+		555CF79D1F4B65310032FF80 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		555CF79F1F4B65310032FF80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5567E0541A7D615E005013B3 /* ManNotificationCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManNotificationCallback.h; sourceTree = "<group>"; };
 		5567E0551A7D615E005013B3 /* ManNotificationCallback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManNotificationCallback.m; sourceTree = "<group>"; };
 		557AFAF71A800C4F008BDF46 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -258,6 +275,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		555CF7941F4B65310032FF80 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55C0CF0719BE04D8009C50D7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -332,6 +356,18 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		555CF7981F4B65310032FF80 /* ManOpenXPC */ = {
+			isa = PBXGroup;
+			children = (
+				555CF7991F4B65310032FF80 /* ManOpenXPCProtocol.h */,
+				555CF79A1F4B65310032FF80 /* ManOpenXPC.h */,
+				555CF79B1F4B65310032FF80 /* ManOpenXPC.m */,
+				555CF79D1F4B65310032FF80 /* main.m */,
+				555CF79F1F4B65310032FF80 /* Info.plist */,
+			);
+			path = ManOpenXPC;
+			sourceTree = "<group>";
+		};
 		557AFAF91A801CB2008BDF46 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
@@ -395,6 +431,7 @@
 				557AFAF91A801CB2008BDF46 /* Vendor */,
 				55C0CF1519BE07E8009C50D7 /* ManOpen */,
 				D392796A0821FFA400376676 /* openman */,
+				555CF7981F4B65310032FF80 /* ManOpenXPC */,
 				D39279800821FFA400376676 /* Frameworks */,
 				D39278ED0821FFA400376676 /* Products */,
 			);
@@ -408,6 +445,7 @@
 				D38A244414E4C3FE00F6AFFE /* cat2html */,
 				D38A245114E4C3FE00F6AFFE /* openman */,
 				55C0CF1019BE04D8009C50D7 /* ManOpen.app */,
+				555CF7971F4B65310032FF80 /* ManOpenXPC.xpc */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -492,6 +530,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		555CF7961F4B65310032FF80 /* ManOpenXPC */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 555CF7A31F4B65310032FF80 /* Build configuration list for PBXNativeTarget "ManOpenXPC" */;
+			buildPhases = (
+				555CF7931F4B65310032FF80 /* Sources */,
+				555CF7941F4B65310032FF80 /* Frameworks */,
+				555CF7951F4B65310032FF80 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ManOpenXPC;
+			productName = ManOpenXPC;
+			productReference = 555CF7971F4B65310032FF80 /* ManOpenXPC.xpc */;
+			productType = "com.apple.product-type.xpc-service";
+		};
 		55C0CEEF19BE04D8009C50D7 /* ManOpen */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 55C0CF0D19BE04D8009C50D7 /* Build configuration list for PBXNativeTarget "ManOpen" */;
@@ -509,6 +564,7 @@
 				55C0CEF019BE04D8009C50D7 /* PBXTargetDependency */,
 				55C0CEF219BE04D8009C50D7 /* PBXTargetDependency */,
 				557AFB4E1A801CD8008BDF46 /* PBXTargetDependency */,
+				555CF7A11F4B65310032FF80 /* PBXTargetDependency */,
 			);
 			name = ManOpen;
 			productInstallPath = "$(HOME)/Apps";
@@ -576,6 +632,9 @@
 				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0900;
 				TargetAttributes = {
+					555CF7961F4B65310032FF80 = {
+						CreatedOnToolsVersion = 9.0;
+					};
 					55C0CEEF19BE04D8009C50D7 = {
 						LastSwiftMigration = 0800;
 					};
@@ -613,6 +672,7 @@
 				D38A242F14E4C3FE00F6AFFE /* cat2rtf */,
 				D38A243A14E4C3FE00F6AFFE /* cat2html */,
 				D38A244614E4C3FE00F6AFFE /* openman */,
+				555CF7961F4B65310032FF80 /* ManOpenXPC */,
 			);
 		};
 /* End PBXProject section */
@@ -677,6 +737,13 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		555CF7951F4B65310032FF80 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55C0CEF419BE04D8009C50D7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -699,6 +766,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		555CF7931F4B65310032FF80 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				555CF79E1F4B65310032FF80 /* main.m in Sources */,
+				555CF79C1F4B65310032FF80 /* ManOpenXPC.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55C0CF0019BE04D8009C50D7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -745,6 +821,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		555CF7A11F4B65310032FF80 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 555CF7961F4B65310032FF80 /* ManOpenXPC */;
+			targetProxy = 555CF7A01F4B65310032FF80 /* PBXContainerItemProxy */;
+		};
 		557AFB4E1A801CD8008BDF46 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SwiftAdditions;
@@ -861,6 +942,49 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		555CF7A41F4B65310032FF80 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = ManOpenXPC/Info.plist;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.maddthesane.ManOpenXPC;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		555CF7A51F4B65310032FF80 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = ManOpenXPC/Info.plist;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.maddthesane.ManOpenXPC;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		55C0CF0E19BE04D8009C50D7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -875,7 +999,7 @@
 				SKIP_INSTALL = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "ManOpen/ManOpenSwift-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
-				USER_HEADER_SEARCH_PATHS = ManOpen;
+				USER_HEADER_SEARCH_PATHS = "ManOpen ManOpenXPC";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -894,7 +1018,7 @@
 				SKIP_INSTALL = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "ManOpen/ManOpenSwift-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
-				USER_HEADER_SEARCH_PATHS = ManOpen;
+				USER_HEADER_SEARCH_PATHS = "ManOpen ManOpenXPC";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -1086,6 +1210,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.clindberg.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = NO;
+				USER_HEADER_SEARCH_PATHS = ManOpenXPC;
 			};
 			name = Debug;
 		};
@@ -1097,12 +1222,22 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.clindberg.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = NO;
+				USER_HEADER_SEARCH_PATHS = ManOpenXPC;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		555CF7A31F4B65310032FF80 /* Build configuration list for PBXNativeTarget "ManOpenXPC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				555CF7A41F4B65310032FF80 /* Debug */,
+				555CF7A51F4B65310032FF80 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		55C0CF0D19BE04D8009C50D7 /* Build configuration list for PBXNativeTarget "ManOpen" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

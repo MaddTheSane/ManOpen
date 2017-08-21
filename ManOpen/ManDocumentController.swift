@@ -55,6 +55,7 @@ class ManDocumentController: NSDocumentController, NSApplicationDelegate {
 	var startedUp = false
 	fileprivate var nibObjects = [AnyObject]()
 	private var bridge: ManBridgeCallback? = nil
+	var xpcListener: NSXPCListener? = nil
 	
 	private final class ManOpenXPC: NSObject, ManOpenProtocol {
 		weak var controller: ManDocumentController?
@@ -336,21 +337,18 @@ class ManDocumentController: NSDocumentController, NSApplicationDelegate {
 		var helpPath = Bundle.main.url(forResource: "Help", withExtension: "rtf")
 		if helpPath == nil {
 			helpPath = Bundle.main.url(forResource: "Help", withExtension: "rtfd")
-			if helpPath == nil {
-				return
-			}
 		}
 		
-		(helpScrollView.contentView.documentView as! NSTextView).readRTFD(fromFile: helpPath!.path)
-		
-		DispatchQueue.global().async {
-			// Set up the one NSXPCListener for this service. It will handle all incoming connections.
-			let listener = NSXPCListener.anonymous()
-			listener.delegate = self
-			
-			// Resuming the serviceListener starts this service. This method does not return.
-			listener.resume()
+		if let helpPath = helpPath {
+			(helpScrollView.contentView.documentView as! NSTextView).readRTFD(fromFile: helpPath.path)
 		}
+		
+		// Set up the one NSXPCListener for this service. It will handle all incoming connections.
+		xpcListener = NSXPCListener.anonymous()
+		xpcListener!.delegate = self
+		
+		// Resuming the serviceListener starts this service.
+		xpcListener!.resume()
 	}
 	
 	@discardableResult

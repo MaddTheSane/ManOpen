@@ -3,6 +3,7 @@
 #import <AppKit/NSWorkspace.h>
 #include <stdlib.h>
 #import "ManOpenProtocol.h"
+#import "ManOpenXPCProtocol.h"
 
 
 static NSString *MakeNSStringFromPath(const char *filename) NS_RETURNS_RETAINED;
@@ -119,13 +120,24 @@ int main (int argc, char * const *argv)
             }
         }
         
-        _connectionToService = [[NSXPCConnection alloc] initWithServiceName:@"org.clindberg.ManOpen"];
-        _connectionToService.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(ManOpen)];
+        //initWithListenerEndpoint
+        _connectionToService = [[NSXPCConnection alloc] initWithServiceName:@"com.github.maddthesane.ManOpenXPC"];
+        _connectionToService.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(ManOpenXPCProtocol)];
         [_connectionToService resume];
+        
+        [_connectionToService.remoteObjectProxy getManOpenEndpointWithReply:^(NSXPCListenerEndpoint * _Nullable endPt) {
+            if (!endPt) {
+                return;
+            }
+            NSXPCConnection *conn2 = [[NSXPCConnection alloc] initWithListenerEndpoint:endPt];
+            conn2.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(ManOpen)];
+        }];
 
         for (NSString *fileName in files)
         {
-            [[_connectionToService remoteObjectProxy] openFile:fileName forceToFront:forceToFront];
+            [[_connectionToService remoteObjectProxy] openFile:fileName forceToFront:forceToFront withReply:^(BOOL success) {
+                //Do nothing for now
+            }];
         }
         
         if (manPath == nil && getenv("MANPATH") != NULL)
@@ -135,9 +147,13 @@ int main (int argc, char * const *argv)
         {
             NSString *currFile = MakeNSStringFromPath(argv[argIndex]);
             if (aproposMode) {
-                [[_connectionToService remoteObjectProxy] openApropos:currFile manPath:manPath forceToFront:forceToFront];
+                [[_connectionToService remoteObjectProxy] openApropos:currFile manPath:manPath forceToFront:forceToFront withReply:^(BOOL success) {
+                    //Do nothing for now
+                }];
             } else {
-                [[_connectionToService remoteObjectProxy] openName:currFile section:section manPath:manPath forceToFront:forceToFront];
+                [[_connectionToService remoteObjectProxy] openName:currFile section:section manPath:manPath forceToFront:forceToFront withReply:^(BOOL success) {
+                    //Do nothing for now
+                }];
             }
         }
         
