@@ -61,18 +61,6 @@
         }
       }
     },
-    "46.title" : {
-      "comment" : "Class = \"NSMenu\"; title = \"OtherViews\"; ObjectID = \"46\";",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "OtherViews"
-          }
-        }
-      }
-    },
     "48.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"3 - Library Calls\"; ObjectID = \"48\";",
       "extractionState" : "extracted_with_value",

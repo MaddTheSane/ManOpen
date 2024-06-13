@@ -25,54 +25,6 @@
         }
       }
     },
-    "424.title" : {
-      "comment" : "Class = \"NSMenu\"; title = \"OtherViews\"; ObjectID = \"424\";",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "OtherViews"
-          }
-        }
-      }
-    },
-    "425.title" : {
-      "comment" : "Class = \"NSMenuItem\"; title = \"Item2\"; ObjectID = \"425\";",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Item2"
-          }
-        }
-      }
-    },
-    "426.title" : {
-      "comment" : "Class = \"NSMenuItem\"; title = \"Item1\"; ObjectID = \"426\";",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Item1"
-          }
-        }
-      }
-    },
-    "427.title" : {
-      "comment" : "Class = \"NSMenuItem\"; title = \"Item3\"; ObjectID = \"427\";",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Item3"
-          }
-        }
-      }
-    },
     "429.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Default Man Page Viewer:\"; ObjectID = \"429\";",
       "extractionState" : "extracted_with_value",
@@ -283,18 +235,6 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "Nroff command"
-          }
-        }
-      }
-    },
-    "467.title" : {
-      "comment" : "Class = \"NSTextFieldCell\"; title = \"Text Cell\"; ObjectID = \"467\";",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Text Cell"
           }
         }
       }

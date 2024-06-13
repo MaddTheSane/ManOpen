@@ -50,7 +50,7 @@ func escapePath(_ path: String, addSurroundingQuotes: Bool = false) -> String {
 	return modPath;
 }
 
-@NSApplicationMain
+@main
 class ManDocumentController: NSDocumentController, NSApplicationDelegate {
 	@IBOutlet weak var helpScrollView: NSScrollView!
 	@IBOutlet weak var openTextPanel: NSPanel!
@@ -164,7 +164,11 @@ class ManDocumentController: NSDocumentController, NSApplicationDelegate {
 		task.launch()
 		
 		if maxLength > 0 {
-			output = pipe.fileHandleForReading.readData(ofLength: maxLength)
+			if #available(macOS 10.15.4, *) {
+				output = try pipe.fileHandleForReading.read(upToCount: maxLength) ?? Data()
+			} else {
+				output = pipe.fileHandleForReading.readData(ofLength: maxLength)
+			}
 			task.terminate()
 		} else {
 			output = try pipe.fileHandleForReading.readDataToEndOfFileIgnoreInterrupt()

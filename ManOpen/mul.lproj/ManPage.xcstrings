@@ -1,18 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "13.title" : {
-      "comment" : "Class = \"NSWindow\"; title = \"Window\"; ObjectID = \"13\";",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Window"
-          }
-        }
-      }
-    },
     "25.ibShadowedToolTip" : {
       "comment" : "Class = \"NSButton\"; ibShadowedToolTip = \" Open selection \"; ObjectID = \"25\";",
       "extractionState" : "extracted_with_value",
@@ -21,18 +9,6 @@
           "stringUnit" : {
             "state" : "new",
             "value" : " Open selection "
-          }
-        }
-      }
-    },
-    "47.title" : {
-      "comment" : "Class = \"NSMenu\"; title = \"OtherViews\"; ObjectID = \"47\";",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "OtherViews"
           }
         }
       }
