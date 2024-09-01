@@ -9,18 +9,11 @@
 import Foundation
 
 /// compress(1) header
-private var compressHeader: [UInt8] {
-	return [0o037, 0o235]
-}
+private let compressHeader: [UInt8] = [0o037, 0o235]
 /// gzip(1) header
-private var gzipHeader: [UInt8] {
-	return [0o037, 0o213]
-}
+private let gzipHeader: [UInt8] = [0o037, 0o213]
 //let rtfStart = "{\\rtf".data(using: String.Encoding.ascii)!
-private let rtfStart: [UInt8] = {
-	let preDat: [UInt8] = [0x7B, 0x5C, 0x72, 0x74, 0x66]
-	return preDat
-}()
+private let rtfStart: [UInt8] = [0x7B, 0x5C, 0x72, 0x74, 0x66]
 
 extension Data {
 	/// Checks the data to see if it looks like the start of an nroff file.

@@ -724,7 +724,7 @@ private func getWordArray(_ string: String) -> [String] {
 }
 
 /// On MacOS X, implement our x-man-page: scheme handler
-@objc(ManOpenURLHandlerCommand)
+@objc(ManOpenURLHandlerCommand) @MainActor
 class ManOpenURLHandlerCommand : NSScriptCommand {
 	/*
 	* Terminal seems to accept URLs of the form x-man-page://ls , which means

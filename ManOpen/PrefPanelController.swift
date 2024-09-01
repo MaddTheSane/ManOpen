@@ -24,7 +24,7 @@ let kQuitWhenLastClosed	= "QuitWhenLastClosed"
 let kNroffCommand		= "NroffCommand"
 
 
-class PrefPanelController: NSWindowController, NSFontChanging, NSTableViewDataSource, NSMenuItemValidation {
+class PrefPanelController: NSWindowController, NSFontChanging, @preconcurrency NSTableViewDataSource, NSMenuItemValidation {
 
 	static let shared: PrefPanelController = {
 		let toRet = PrefPanelController(windowNibName: "PrefPanel")
