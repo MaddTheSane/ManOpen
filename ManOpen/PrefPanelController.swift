@@ -62,10 +62,10 @@ class PrefPanelController: NSWindowController, NSFontChanging, @preconcurrency N
 		
 		
 		if manager.fileExists(atPath: "/sw/share/man") { // fink
-			manpath = "/sw/share/man:" + manpath
+			manpath = ":/sw/share/man" + manpath
 		}
 		if manager.fileExists(atPath: "/opt/local/share/man") {  //macports
-			manpath = "/opt/local/share/man:" + manpath
+			manpath = ":/opt/local/share/man" + manpath
 		}
 		if manager.fileExists(atPath: "/opt/X11/share/man") {
 			manpath += ":/opt/X11/share/man"
