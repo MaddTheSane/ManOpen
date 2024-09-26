@@ -179,9 +179,9 @@ class AproposDocument: NSDocument, NSTableViewDataSource {
 		if aproposItems.count == 0 {
 			let anAlert = NSAlert()
 			anAlert.messageText = NSLocalizedString("Nothing found", comment: "Nothing found")
-			anAlert.informativeText = String(format: NSLocalizedString("No pages related to '%@' found", comment: "When a page couldn't be found"), apropos)
+			anAlert.informativeText = String.localizedStringWithFormat(NSLocalizedString("No pages related to '%@' found", comment: "When a page couldn't be found"), apropos)
 			anAlert.runModal()
-			return nil;
+			return nil
 		}
 	}
 	

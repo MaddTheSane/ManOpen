@@ -81,6 +81,11 @@ class ManDocumentController: NSDocumentController, NSApplicationDelegate {
 		return !(UserDefaults.standard[kKeepPanelsOpen]!)
 	}
 	
+	// MARK: - NSApplicationDelegate
+	func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
+		return true
+	}
+	
 	func applicationDidFinishLaunching(_ notification: Notification) {
 		NSApp.servicesProvider = self
 		/* Remember window positions, in case they're non-modal */
@@ -118,6 +123,8 @@ class ManDocumentController: NSDocumentController, NSApplicationDelegate {
 		}
 		return false
 	}
+	
+	// MARK: -
 	
 	override func removeDocument(_ document: NSDocument) {
 		let autoQuit: Bool = UserDefaults.standard[kQuitWhenLastClosed]!
@@ -415,7 +422,7 @@ class ManDocumentController: NSDocumentController, NSApplicationDelegate {
 			let locCount = NumberFormatter.localizedString(from: NSNumber(value: words.count), number: .decimal)
 			let alert = NSAlert()
 			alert.messageText = NSLocalizedString("Warning", comment: "Warning")
-			alert.informativeText = String(format: NSLocalizedString("This will open approximately %@ windows!", comment: "This will open approximately (the number of) windows!"), locCount)
+			alert.informativeText = String.localizedStringWithFormat(NSLocalizedString("This will open approximately %@ windows!", comment: "This will open approximately (the number of) windows!"), locCount)
 			alert.addButton(withTitle: NSLocalizedString("Cancel", comment: "Cancel"))
 			alert.addButton(withTitle: NSLocalizedString("Continue", comment: "Continue"))
 			let aNum = alert.runModal()
