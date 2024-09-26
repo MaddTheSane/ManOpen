@@ -75,7 +75,7 @@ final class ManAppInfoArray: Sequence {
 	}
 	
 	func firstIndex(withBundleID bundleID: String?) -> Int? {
-		guard let bundleID = bundleID else {
+		guard let bundleID else {
 			return nil
 		}
 		

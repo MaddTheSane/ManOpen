@@ -192,14 +192,19 @@ class ManDocumentController: NSDocumentController, NSApplicationDelegate {
 			
 			let manager = FileManager.default
 			var len = data.count
-			let ptr = (data as NSData).bytes
 			
-			// 0A is == '\n'
-			if let newlinePtr = memchr(ptr, 0x0A, len) {
-				len = ptr.distance(to: newlinePtr)
+			data.withUnsafeBytes { urbp in
+				// 0A is == '\n'
+				if let newlinePtr = memchr(urbp.baseAddress, 0x0A, len) {
+					len = urbp.baseAddress!.distance(to: newlinePtr)
+				}
 			}
 			
-			let filename = manager.string(withFileSystemRepresentation: ptr.assumingMemoryBound(to: Int8.self), length: len)
+			let filename = data.withUnsafeBytes { ptr in
+				ptr.baseAddress!.withMemoryRebound(to: Int8.self, capacity: len) { ptr2 in
+					manager.string(withFileSystemRepresentation: ptr2, length: len)
+				}
+			}
 			if manager.fileExists(atPath: filename) {
 				return filename
 			}
@@ -288,7 +293,7 @@ class ManDocumentController: NSDocumentController, NSApplicationDelegate {
 					error = anErr
 				}
 			} else {
-				error = CocoaError(.fileReadUnknown, userInfo: [NSURLErrorKey: url])
+				error = CocoaError(.fileReadUnknown, userInfo: [NSURLErrorKey: standardizedURL])
 			}
 		}
 		
@@ -354,8 +359,7 @@ class ManDocumentController: NSDocumentController, NSApplicationDelegate {
 			document = ManDocument(name: name, section: section, manPath: manPath, title: title)
 			
 			if let filename = manFile(name: name, section: section, manPath: manPath) {
-				let afn = (filename as NSString).resolvingSymlinksInPath
-				let fileURL = URL(fileURLWithPath: afn)
+				let fileURL = URL(fileURLWithPath: filename).resolvingSymlinksInPath()
 				noteNewRecentDocumentURL(fileURL)
 				document?.fileURL = fileURL
 			}
