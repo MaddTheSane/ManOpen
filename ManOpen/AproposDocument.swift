@@ -48,12 +48,12 @@ class AproposDocument: NSDocument, NSTableViewDataSource {
 			return toRet == .orderedAscending
 		})
 		
-		guard lines.count > 0 else {
+		guard !lines.isEmpty else {
 			return
 		}
 		
 		for line in lines {
-			guard line.count > 0 else {
+			guard !line.isEmpty else {
 				continue
 			}
 			
@@ -123,7 +123,7 @@ class AproposDocument: NSDocument, NSTableViewDataSource {
 		fileType = "apropos"
 		
 		/* Searching for a blank string doesn't work anymore... use a catchall regex */
-		if apropos.count == 0 {
+		if apropos.isEmpty {
 			aapropos = "."
 		}
 		searchString = aapropos
@@ -176,7 +176,7 @@ class AproposDocument: NSDocument, NSTableViewDataSource {
 		self.init()
 		loadWithString(apropos, manPath: manPath, title: aTitle)
 		
-		if aproposItems.count == 0 {
+		if aproposItems.isEmpty {
 			let anAlert = NSAlert()
 			anAlert.messageText = NSLocalizedString("Nothing found", comment: "Nothing found")
 			anAlert.informativeText = String.localizedStringWithFormat(NSLocalizedString("No pages related to '%@' found", comment: "When a page couldn't be found"), apropos)

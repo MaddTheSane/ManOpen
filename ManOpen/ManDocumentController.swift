@@ -193,7 +193,7 @@ class ManDocumentController: NSDocumentController, NSApplicationDelegate {
 		var command = manCommand(manPath: manPath)
 		command += " -w \(section ?? "") \(name)"
 		if let data = try? dataByExecutingCommand(command) {
-			if data.count <= 0 {
+			if data.isEmpty {
 				return nil
 			}
 			
@@ -765,7 +765,7 @@ class ManOpenURLHandlerCommand : NSScriptCommand {
 			
 			var section: String? = nil
 			for name in components {
-				if name.count == 0 || name == "" || name == "/" {
+				if name.isEmpty || name == "" || name == "/" {
 					continue
 				}
 				if isSectionWord(name) {

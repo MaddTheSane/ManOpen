@@ -155,7 +155,7 @@ final class ManDocument: NSDocument, NSWindowDelegate {
 		fileType = "man"
 		shortTitle = title
 		
-		if let section, section.count > 0 {
+		if let section, !section.isEmpty {
 			command += " " + section.lowercased()
 			copyURL = URL(string: URL_SCHEME_PREFIX + "//\(section)/\(name)")
 		} else {
@@ -304,7 +304,7 @@ final class ManDocument: NSDocument, NSWindowDelegate {
 	func setupSectionPopup() {
 		sectionPopup.removeAllItems()
 		sectionPopup.addItem(withTitle: "Section:")
-		sectionPopup.isEnabled = sections.count > 0
+		sectionPopup.isEnabled = !sections.isEmpty
 		
 		if sectionPopup.isEnabled {
 			sectionPopup.addItems(withTitles: sections.map({$0.name}))

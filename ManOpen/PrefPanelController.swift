@@ -37,7 +37,7 @@ class PrefPanelController: NSWindowController, NSFontChanging, @preconcurrency N
 	private var manPathArrayPriv = [String]()
 	@objc dynamic var manPathArray: [String] {
 		get {
-			if manPathArrayPriv.count == 0 {
+			if manPathArrayPriv.isEmpty {
 				let path = UserDefaults.standard.manPath
 				manPathArrayPriv = path.components(separatedBy: ":")
 			}
@@ -291,7 +291,7 @@ class PrefPanelController: NSWindowController, NSFontChanging, @preconcurrency N
 	}
 
 	func saveManPath() {
-		if manPathArray.count > 0 {
+		if !manPathArray.isEmpty {
 			UserDefaults.standard[manPathKey] = manPathArray.joined(separator: ":")
 		}
 	}
@@ -302,7 +302,7 @@ class PrefPanelController: NSWindowController, NSFontChanging, @preconcurrency N
 			let hasObject = manPathArrayPriv.filter { (otherObj) -> Bool in
 				return anObj == otherObj
 			}
-			if hasObject.count == 0 {
+			if hasObject.isEmpty {
 				manPathArrayPriv.insert(anObj, at: atIndex)
 			}
 		}
@@ -484,7 +484,7 @@ class PrefPanelController: NSWindowController, NSFontChanging, @preconcurrency N
 			pathsToAdd = paths(from: pb)
 		}
 		
-		if let pathsToAdd, pathsToAdd.count > 0 {
+		if let pathsToAdd, !pathsToAdd.isEmpty {
 			addPathDirectories(pathsToAdd, atIndex: row, removeFirst: removeSet)
 			return true
 		}
