@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="22505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23094" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23094"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -10,7 +10,6 @@
             <connections>
                 <outlet property="appPopup" destination="422" id="479"/>
                 <outlet property="fontField" destination="439" id="480"/>
-                <outlet property="generalSwitchMatrix" destination="430" id="481"/>
                 <outlet property="manPathController" destination="477" id="482"/>
                 <outlet property="manPathTableView" destination="465" id="483"/>
                 <outlet property="window" destination="417" id="484"/>
@@ -24,7 +23,7 @@
             <windowCollectionBehavior key="collectionBehavior" moveToActiveSpace="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="289" y="513" width="347" height="364"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1512" height="944"/>
             <value key="minSize" type="size" width="340" height="364"/>
             <view key="contentView" id="418">
                 <rect key="frame" x="0.0" y="0.0" width="347" height="364"/>
@@ -39,56 +38,8 @@
                                     <rect key="frame" x="10" y="33" width="301" height="302"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <matrix verticalHuggingPriority="750" mode="highlight" allowsEmptySelection="NO" translatesAutoresizingMaskIntoConstraints="NO" id="430">
-                                            <rect key="frame" x="17" y="182" width="267" height="100"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="cellSize" width="267" height="20"/>
-                                            <buttonCell key="prototype" type="check" title="Quit when last window is closed" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="436">
-                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <cells>
-                                                <column>
-                                                    <buttonCell type="check" title="Quit when last window is closed" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="431">
-                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                        <font key="font" metaFont="system"/>
-                                                        <connections>
-                                                            <binding destination="476" name="value" keyPath="values.QuitWhenLastClosed" id="503"/>
-                                                        </connections>
-                                                    </buttonCell>
-                                                    <buttonCell type="check" title="Keep Title/Apropos panels open" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="432">
-                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                        <font key="font" metaFont="system"/>
-                                                        <connections>
-                                                            <binding destination="476" name="value" keyPath="values.KeepPanelsOpen" id="502"/>
-                                                        </connections>
-                                                    </buttonCell>
-                                                    <buttonCell type="check" title="Open Title panel on startup" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="433">
-                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                        <font key="font" metaFont="system"/>
-                                                        <connections>
-                                                            <binding destination="476" name="value" keyPath="values.OpenPanelOnStartup" id="501"/>
-                                                        </connections>
-                                                    </buttonCell>
-                                                    <buttonCell type="check" title="Open Title panel when no windows" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="434">
-                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                        <font key="font" metaFont="system"/>
-                                                        <connections>
-                                                            <binding destination="476" name="value" keyPath="values.OpenPanelWhenNoWindows" id="500"/>
-                                                        </connections>
-                                                    </buttonCell>
-                                                    <buttonCell type="check" title="Save windows on quit" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="435">
-                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                        <font key="font" metaFont="system"/>
-                                                        <connections>
-                                                            <binding destination="476" name="value" keyPath="values.NSQuitAlwaysKeepsWindows" id="497"/>
-                                                        </connections>
-                                                    </buttonCell>
-                                                </column>
-                                            </cells>
-                                        </matrix>
                                         <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="422">
-                                            <rect key="frame" x="17" y="126" width="268" height="25"/>
+                                            <rect key="frame" x="17" y="122" width="268" height="25"/>
                                             <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" borderStyle="border" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" autoenablesItems="NO" id="423">
                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="system" size="14"/>
@@ -105,23 +56,86 @@
                                             </connections>
                                         </popUpButton>
                                         <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="156" translatesAutoresizingMaskIntoConstraints="NO" id="428">
-                                            <rect key="frame" x="18" y="158" width="160" height="16"/>
+                                            <rect key="frame" x="18" y="154" width="160" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" alignment="left" title="Default Man Page Viewer:" id="429">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
+                                        <button tag="-1" translatesAutoresizingMaskIntoConstraints="NO" id="rQm-B5-KBw">
+                                            <rect key="frame" x="18" y="265" width="219" height="18"/>
+                                            <buttonCell key="cell" type="check" title="Quit when last window is closed" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="431">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                                <connections>
+                                                    <binding destination="476" name="value" keyPath="values.QuitWhenLastClosed" id="503"/>
+                                                </connections>
+                                            </buttonCell>
+                                        </button>
+                                        <button tag="-1" translatesAutoresizingMaskIntoConstraints="NO" id="cjy-8j-IWK">
+                                            <rect key="frame" x="18" y="243" width="219" height="18"/>
+                                            <buttonCell key="cell" type="check" title="Keep Title/Apropos panels open" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="432">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                                <connections>
+                                                    <binding destination="476" name="value" keyPath="values.KeepPanelsOpen" id="502"/>
+                                                </connections>
+                                            </buttonCell>
+                                        </button>
+                                        <button tag="-1" translatesAutoresizingMaskIntoConstraints="NO" id="T0b-VK-6e7">
+                                            <rect key="frame" x="18" y="221" width="191" height="18"/>
+                                            <buttonCell key="cell" type="check" title="Open Title panel on startup" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="433">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                                <connections>
+                                                    <binding destination="476" name="value" keyPath="values.OpenPanelOnStartup" id="501"/>
+                                                </connections>
+                                            </buttonCell>
+                                        </button>
+                                        <button tag="-1" translatesAutoresizingMaskIntoConstraints="NO" id="2PI-yc-aQZ">
+                                            <rect key="frame" x="18" y="199" width="236" height="18"/>
+                                            <buttonCell key="cell" type="check" title="Open Title panel when no windows" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="434">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                                <connections>
+                                                    <binding destination="476" name="value" keyPath="values.OpenPanelWhenNoWindows" id="500"/>
+                                                </connections>
+                                            </buttonCell>
+                                        </button>
+                                        <button tag="-1" translatesAutoresizingMaskIntoConstraints="NO" id="IlC-LY-HYs">
+                                            <rect key="frame" x="18" y="177" width="157" height="18"/>
+                                            <buttonCell key="cell" type="check" title="Save windows on quit" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="435">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                                <connections>
+                                                    <binding destination="476" name="value" keyPath="values.NSQuitAlwaysKeepsWindows" id="497"/>
+                                                </connections>
+                                            </buttonCell>
+                                        </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="428" firstAttribute="top" secondItem="430" secondAttribute="bottom" constant="8" symbolic="YES" id="NQT-PG-g7B"/>
-                                        <constraint firstAttribute="centerX" secondItem="430" secondAttribute="centerX" id="cta-dJ-nc0"/>
+                                        <constraint firstItem="2PI-yc-aQZ" firstAttribute="top" secondItem="T0b-VK-6e7" secondAttribute="bottom" constant="6" symbolic="YES" id="1UQ-AT-AgP"/>
+                                        <constraint firstItem="T0b-VK-6e7" firstAttribute="leading" secondItem="rQm-B5-KBw" secondAttribute="leading" id="2o7-3q-K5Z"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="rQm-B5-KBw" secondAttribute="trailing" constant="20" symbolic="YES" id="7Tn-88-cv5"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="T0b-VK-6e7" secondAttribute="trailing" constant="20" symbolic="YES" id="Jwi-X7-O0s"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="IlC-LY-HYs" secondAttribute="trailing" constant="20" symbolic="YES" id="MVL-m6-1Jc"/>
+                                        <constraint firstItem="rQm-B5-KBw" firstAttribute="top" secondItem="421" secondAttribute="top" constant="20" symbolic="YES" id="OfM-u2-GJX"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cjy-8j-IWK" secondAttribute="trailing" constant="20" symbolic="YES" id="Tyt-l9-6IX"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="2PI-yc-aQZ" secondAttribute="trailing" constant="20" symbolic="YES" id="Urz-vL-llT"/>
+                                        <constraint firstItem="cjy-8j-IWK" firstAttribute="top" secondItem="rQm-B5-KBw" secondAttribute="bottom" constant="6" symbolic="YES" id="Y6H-7u-qvH"/>
+                                        <constraint firstItem="IlC-LY-HYs" firstAttribute="leading" secondItem="rQm-B5-KBw" secondAttribute="leading" id="bct-MN-yVx"/>
+                                        <constraint firstItem="cjy-8j-IWK" firstAttribute="leading" secondItem="rQm-B5-KBw" secondAttribute="leading" id="dMP-bB-LDi"/>
+                                        <constraint firstItem="428" firstAttribute="top" secondItem="IlC-LY-HYs" secondAttribute="bottom" constant="8" symbolic="YES" id="edE-Xz-qQn"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="428" secondAttribute="trailing" constant="20" symbolic="YES" id="enD-Dz-qMV"/>
                                         <constraint firstItem="422" firstAttribute="leading" secondItem="428" secondAttribute="leading" id="fyV-bg-7lJ"/>
+                                        <constraint firstItem="T0b-VK-6e7" firstAttribute="top" secondItem="cjy-8j-IWK" secondAttribute="bottom" constant="6" symbolic="YES" id="j14-oa-KNU"/>
                                         <constraint firstItem="422" firstAttribute="leading" secondItem="421" secondAttribute="leading" constant="20" symbolic="YES" id="mVZ-vv-pFL"/>
                                         <constraint firstAttribute="centerX" secondItem="422" secondAttribute="centerX" id="ncr-lv-Ppn"/>
-                                        <constraint firstItem="430" firstAttribute="top" secondItem="421" secondAttribute="top" constant="20" symbolic="YES" id="uXg-ib-9jg"/>
+                                        <constraint firstItem="2PI-yc-aQZ" firstAttribute="leading" secondItem="rQm-B5-KBw" secondAttribute="leading" id="sXw-fp-Rwp"/>
+                                        <constraint firstItem="IlC-LY-HYs" firstAttribute="top" secondItem="2PI-yc-aQZ" secondAttribute="bottom" constant="6" symbolic="YES" id="va3-k8-pha"/>
                                         <constraint firstItem="422" firstAttribute="top" secondItem="428" secondAttribute="bottom" constant="8" symbolic="YES" id="zUw-rE-tZU"/>
+                                        <constraint firstItem="rQm-B5-KBw" firstAttribute="leading" secondItem="421" secondAttribute="leading" constant="20" symbolic="YES" id="zyZ-92-1pf"/>
                                     </constraints>
                                 </view>
                             </tabViewItem>

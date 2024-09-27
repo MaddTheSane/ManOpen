@@ -35,7 +35,8 @@
             "value" : "Title"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     }
   },
   "version" : "1.0"

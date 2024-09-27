@@ -2,7 +2,6 @@
   "sourceLanguage" : "en",
   "strings" : {
     "Open File in ManOpen" : {
-      "comment" : "ServicesMenu.strings\n  ManOpen\n\n  Created by Nick Zitzmann on 2/28/21.",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {

@@ -97,18 +97,6 @@
         }
       }
     },
-    "436.title" : {
-      "comment" : "Class = \"NSButtonCell\"; title = \"Quit when last window is closed\"; ObjectID = \"436\";",
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Quit when last window is closed"
-          }
-        }
-      }
-    },
     "437.label" : {
       "comment" : "Class = \"NSTabViewItem\"; label = \"Appearance\"; ObjectID = \"437\";",
       "extractionState" : "extracted_with_value",

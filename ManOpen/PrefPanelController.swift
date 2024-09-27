@@ -52,7 +52,6 @@ class PrefPanelController: NSWindowController, NSFontChanging, @preconcurrency N
 	@IBOutlet weak var manPathController: NSArrayController!
 	@IBOutlet weak var manPathTableView: NSTableView!
 	@IBOutlet weak var fontField: NSTextField!
-	@IBOutlet weak var generalSwitchMatrix: NSMatrix!
 	@IBOutlet weak var appPopup: NSPopUpButton!
 	
 	class func registerManDefaults() {
