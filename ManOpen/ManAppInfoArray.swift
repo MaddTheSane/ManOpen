@@ -53,6 +53,23 @@ final class ManAppInfoArray: Sequence {
 		return allManViewerApps[location]
 	}
 	
+	var first: ManAppInfo? {
+		return allManViewerApps.first
+	}
+	
+	func addApp(from id: URL, shouldResort sort: Bool = false) {
+		guard let info = ManAppInfo(url: id) else {
+			//NSBeep()
+			return
+		}
+		if !allManViewerApps.contains(info) {
+			allManViewerApps.append(info)
+			if sort {
+				sortApps()
+			}
+		}
+	}
+
 	func addApp(identifier id: String, shouldResort sort: Bool = false) {
 		guard let info = ManAppInfo(bundleID: id) else {
 			//NSBeep()
@@ -81,6 +98,20 @@ final class ManAppInfoArray: Sequence {
 		
 		for (i, obj) in allManViewerApps.enumerated() {
 			if obj == bundleID {
+				return i
+			}
+		}
+		
+		return nil
+	}
+	
+	func firstIndex(with bundleID: URL?) -> Int? {
+		guard let bundleID else {
+			return nil
+		}
+		
+		for (i, obj) in allManViewerApps.enumerated() {
+			if obj.appURL == bundleID {
 				return i
 			}
 		}

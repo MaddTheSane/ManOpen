@@ -214,25 +214,22 @@ class PrefPanelController: NSWindowController, NSFontChanging, @preconcurrency N
 	}
 
 	func resetCurrentApp() {
-		var currSetID: String? = {
-			if let aSetID = LSCopyDefaultHandlerForURLScheme(URL_SCHEME as NSString)?.takeRetainedValue() {
-				return aSetID as String
-			}
-			
-			return nil
-		}()
+		var components = URLComponents()
+		components.scheme = URL_SCHEME
+		components.host = "man"
 		
-		if currSetID == nil {
-			currSetID = appInfos[0].bundleID
+		var currSetURL = NSWorkspace.shared.urlForApplication(toOpen: components.url!)
+		if currSetURL == nil {
+			currSetURL = appInfos.first?.appURL
 		}
 		
-		if let currSetID = currSetID {
+		if let currSetURL, let newAppID = Bundle(url: currSetURL)?.bundleIdentifier {
 			var resetPopup: Bool = (currentAppID == "") //first time
 			
-			currentAppID = currSetID
+			currentAppID = newAppID
 			
-			if appInfos.firstIndex(withBundleID: currSetID) == nil {
-				appInfos.addApp(identifier: currSetID, shouldResort: true)
+			if appInfos.firstIndex(with: currSetURL) == nil {
+				appInfos.addApp(from: currSetURL, shouldResort: true)
 				resetPopup = true
 			}
 			if resetPopup {
@@ -240,14 +237,60 @@ class PrefPanelController: NSWindowController, NSFontChanging, @preconcurrency N
 			} else {
 				setAppPopupToCurrent()
 			}
+		} else {
+			//Fallback to old way in case of failure.
+			var currSetID: String? = {
+				if let aSetID = LSCopyDefaultHandlerForURLScheme(URL_SCHEME as NSString)?.takeRetainedValue() {
+					return aSetID as String
+				}
+				
+				return nil
+			}()
+			
+			if currSetID == nil {
+				currSetID = appInfos.first?.bundleID
+			}
+			
+			if let currSetID {
+				var resetPopup: Bool = (currentAppID == "") //first time
+				
+				currentAppID = currSetID
+				
+				if appInfos.firstIndex(withBundleID: currSetID) == nil {
+					appInfos.addApp(identifier: currSetID, shouldResort: true)
+					resetPopup = true
+				}
+				if resetPopup {
+					resetAppPopup()
+				} else {
+					setAppPopupToCurrent()
+				}
+			}
+		}
+	}
+	
+	@available(macOS 12.0, *)
+	func setManPageViewer(to: URL) {
+		Task {
+			do {
+				try await NSWorkspace.shared.setDefaultApplication(at: to, toOpenURLsWithScheme: URL_SCHEME)
+				
+				resetCurrentApp()
+			} catch {
+				NSSound.beep()
+				print("Could not set default \(URL_SCHEME_PREFIX) app: Launch Services error \(error)")
+				self.presentError(error)
+			}
 		}
 	}
 	
 	func setManPageViewer(_ bundleID: String) {
 		let error = LSSetDefaultHandlerForURLScheme(URL_SCHEME as NSString, bundleID as NSString)
 		
-		if (error != noErr) {
+		if error != noErr {
+			NSSound.beep()
 			print("Could not set default \(URL_SCHEME_PREFIX) app: Launch Services error \(error)")
+			self.presentError(NSError(domain: NSOSStatusErrorDomain, code: Int(error)))
 		}
 		
 		resetCurrentApp()
@@ -260,7 +303,11 @@ class PrefPanelController: NSWindowController, NSFontChanging, @preconcurrency N
 		if choice >= 0 && choice < appInfos.count {
 			let info = appInfos[choice]
 			if info.bundleID != currentAppID {
-				setManPageViewer(info.bundleID)
+				if #available(macOS 12.0, *) {
+					setManPageViewer(to: info.appURL)
+				} else {
+					setManPageViewer(info.bundleID)
+				}
 			}
 		} else {
 			let panel = NSOpenPanel()
@@ -274,10 +321,26 @@ class PrefPanelController: NSWindowController, NSFontChanging, @preconcurrency N
 				panel.allowedFileTypes = [kUTTypeApplicationBundle as String]
 			}
 			panel.beginSheetModal(for: appPopup.window!) { (result) -> Void in
-				if result == .OK,
-					let appURL = panel.url,
-					let appID = Bundle(url: appURL)?.bundleIdentifier {
-					self.setManPageViewer(appID)
+				if #available(macOS 12.0, *) {
+					if result == .OK,
+					   let appURL = panel.url {
+						Task {
+							do {
+								try await NSWorkspace.shared.setDefaultApplication(at: appURL, toOpenURLsWithScheme: URL_SCHEME)
+								
+								self.resetCurrentApp()
+							} catch {
+								NSSound.beep()
+								self.presentError(error)
+							}
+						}
+					}
+				} else {
+					if result == .OK,
+					   let appURL = panel.url,
+					   let appID = Bundle(url: appURL)?.bundleIdentifier {
+						self.setManPageViewer(appID)
+					}
 				}
 				self.setAppPopupToCurrent()
 			}
