@@ -206,13 +206,13 @@ class AproposDocument: NSDocument, NSTableViewDataSource {
 	override func restoreState(with coder: NSCoder) {
 		super.restoreState(with: coder)
 		
-		if !coder.containsValue(forKey: restoreSearchString) {
+		guard coder.containsValue(forKey: restoreSearchString) else {
 			return
 		}
 		
 		guard let search = coder.decodeObject(forKey: restoreSearchString) as? String,
 			let theTitle = coder.decodeObject(forKey: restoreTitle) as? String else {
-				return;
+				return
 		}
 		let manPath = UserDefaults.standard.manPath
 		

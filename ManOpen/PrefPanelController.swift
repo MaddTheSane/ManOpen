@@ -268,7 +268,11 @@ class PrefPanelController: NSWindowController, NSFontChanging, @preconcurrency N
 			panel.allowsMultipleSelection = false
 			panel.resolvesAliases = true
 			panel.canChooseFiles = true
-			panel.allowedFileTypes = [kUTTypeApplicationBundle as String]
+			if #available(macOS 11.0, *) {
+				panel.allowedContentTypes = [.applicationBundle]
+			} else {
+				panel.allowedFileTypes = [kUTTypeApplicationBundle as String]
+			}
 			panel.beginSheetModal(for: appPopup.window!) { (result) -> Void in
 				if result == .OK,
 					let appURL = panel.url,

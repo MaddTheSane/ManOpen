@@ -76,7 +76,7 @@ final class ManAppInfo: Hashable, CustomDebugStringConvertible, CustomStringConv
 			hasher.combine(bundleID.lowercased())
 			return
 		}
-		hasher.combine(ident2)
+		hasher.combine(ident2 as Data)
 	}
 	
 	func compare(_ string: ManAppInfo) -> ComparisonResult {

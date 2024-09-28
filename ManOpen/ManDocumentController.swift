@@ -82,6 +82,7 @@ class ManDocumentController: NSDocumentController, NSApplicationDelegate {
 	}
 	
 	// MARK: - NSApplicationDelegate
+	
 	func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
 		return true
 	}
@@ -200,6 +201,7 @@ class ManDocumentController: NSDocumentController, NSApplicationDelegate {
 			let manager = FileManager.default
 			var len = data.count
 			
+			//TODO: use Swift equivalent.
 			data.withUnsafeBytes { urbp in
 				// 0A is == '\n'
 				if let newlinePtr = memchr(urbp.baseAddress, 0x0A, len) {
@@ -261,7 +263,7 @@ class ManDocumentController: NSDocumentController, NSApplicationDelegate {
 					gzclose(gzf)
 				} else {
 					let command = "/usr/bin/gzip -dc '\(escapePath(url.path))'"
-					fileHeader = try! dataByExecutingCommand(command, maxLength: Int(maxLength))
+					fileHeader = try! dataByExecutingCommand(command, maxLength: maxLength)
 				}
 				manType = "mangz"
 				catType = "catgz"
@@ -317,7 +319,7 @@ class ManDocumentController: NSDocumentController, NSApplicationDelegate {
 		openDocument(withContentsOf: urlOrNil ?? contentsURL, display: displayDocument, completionHandler: completionHandler)
 	}
 	
-	/* Ignore the types; man/cat files can have any range of extensions. */
+	/// Ignore the types; man/cat files can have any range of extensions.
 	override func runModalOpenPanel(_ openPanel: NSOpenPanel, forTypes types: [String]?) -> Int {
 		return openPanel.runModal().rawValue
 	}
@@ -345,12 +347,13 @@ class ManDocumentController: NSDocumentController, NSApplicationDelegate {
 		var helpPath = Bundle.main.url(forResource: "Help", withExtension: "rtf")
 		if helpPath == nil {
 			helpPath = Bundle.main.url(forResource: "Help", withExtension: "rtfd")
-			if helpPath == nil {
-				return
-			}
 		}
 		
-		(helpScrollView.contentView.documentView as! NSTextView).readRTFD(fromFile: helpPath!.path)
+		guard let helpPath else {
+			return
+		}
+		
+		(helpScrollView.contentView.documentView as! NSTextView).readRTFD(fromFile: helpPath.path)
 	}
 	
 	/// A parallel for `-openDocumentWithContentsOfFile:` for a specific man page
