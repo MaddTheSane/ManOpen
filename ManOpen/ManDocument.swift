@@ -423,6 +423,19 @@ final class ManDocument: NSDocument, NSWindowDelegate {
 	}
 	
 	// MARK: NSWindowRestoration functions
+	override class var restorableStateKeyPaths: [String] {
+		return super.restorableStateKeyPaths + [RestoreWindowDictKey]
+	}
+	
+	@available(macOS 12.0, *)
+	override class func allowedClasses(forRestorableStateKeyPath keyPath: String) -> [AnyClass] {
+		if keyPath == RestoreWindowDictKey {
+			return [NSDictionary.self, NSString.self, NSNumber.self, NSURL.self]
+		}
+		
+		return super.allowedClasses(forRestorableStateKeyPath: keyPath)
+	}
+		
 	override func encodeRestorableState(with coder: NSCoder) {
 		super.encodeRestorableState(with: coder)
 		coder.encode(restoreData, forKey: RestoreWindowDictKey)
@@ -435,7 +448,7 @@ final class ManDocument: NSDocument, NSWindowDelegate {
 			return
 		}
 		
-		if let restoreInfo = coder.decodeObject(forKey: RestoreWindowDictKey) as? [String: Any] {
+		if let restoreInfo = coder.decodeObject(of: [NSString.self, NSNumber.self, NSDictionary.self, NSURL.self], forKey: RestoreWindowDictKey) as? [String: Any] {
 			if let aRestoreName = restoreInfo[RestoreNameKey] as? String,
 				let title = restoreInfo[RestoreTitleKey] as? String {
 				let section = restoreInfo[RestoreSectionKey] as? String

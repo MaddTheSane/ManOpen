@@ -197,6 +197,22 @@ class AproposDocument: NSDocument, NSTableViewDataSource {
 	}
 	
 	// MARK: Document restoration
+	override class var restorableStateKeyPaths: [String] {
+		return [restoreSearchString, restoreTitle] + super.restorableStateKeyPaths
+	}
+	
+	@available(macOS 12.0, *)
+	override class func allowedClasses(forRestorableStateKeyPath keyPath: String) -> [AnyClass] {
+		switch keyPath {
+		case restoreSearchString:
+			return [NSString.self]
+		case restoreTitle:
+			return [NSString.self]
+		default:
+			return super.allowedClasses(forRestorableStateKeyPath: keyPath)
+		}
+	}
+
 	override func encodeRestorableState(with coder: NSCoder) {
 		super.encodeRestorableState(with: coder)
 		coder.encode(searchString, forKey: restoreSearchString)
@@ -210,8 +226,8 @@ class AproposDocument: NSDocument, NSTableViewDataSource {
 			return
 		}
 		
-		guard let search = coder.decodeObject(forKey: restoreSearchString) as? String,
-			let theTitle = coder.decodeObject(forKey: restoreTitle) as? String else {
+		guard let search = coder.decodeObject(of: NSString.self, forKey: restoreSearchString) as? String,
+			let theTitle = coder.decodeObject(of: NSString.self, forKey: restoreTitle) as? String else {
 				return
 		}
 		let manPath = UserDefaults.standard.manPath

@@ -492,7 +492,7 @@ class ManDocumentController: NSDocumentController, NSApplicationDelegate {
 			}
 		}
 		
-		if var lastWord = lastWord {
+		if var lastWord {
 			if lastWord.hasSuffix(",") {
 				let lastIndex = lastWord.index(before: lastWord.endIndex)
 				lastWord = String(lastWord[lastWord.startIndex..<lastIndex])
