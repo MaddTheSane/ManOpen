@@ -271,15 +271,15 @@ class PrefPanelController: NSWindowController, NSFontChanging, @preconcurrency N
 	
 	@available(macOS 12.0, *)
 	func setManPageViewer(to: URL) {
-		Task {
+		Task.detached {
 			do {
 				try await NSWorkspace.shared.setDefaultApplication(at: to, toOpenURLsWithScheme: URL_SCHEME)
 				
-				resetCurrentApp()
+				await self.resetCurrentApp()
 			} catch {
 				NSSound.beep()
 				print("Could not set default \(URL_SCHEME_PREFIX) app: Launch Services error \(error)")
-				self.presentError(error)
+				await self.presentError(error)
 			}
 		}
 	}
@@ -324,14 +324,14 @@ class PrefPanelController: NSWindowController, NSFontChanging, @preconcurrency N
 				if #available(macOS 12.0, *) {
 					if result == .OK,
 					   let appURL = panel.url {
-						Task {
+						Task.detached {
 							do {
 								try await NSWorkspace.shared.setDefaultApplication(at: appURL, toOpenURLsWithScheme: URL_SCHEME)
 								
-								self.resetCurrentApp()
+								await self.resetCurrentApp()
 							} catch {
 								NSSound.beep()
-								self.presentError(error)
+								await self.presentError(error)
 							}
 						}
 					}
