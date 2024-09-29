@@ -49,6 +49,7 @@ class PrefPanelController: NSWindowController, NSFontChanging, @preconcurrency N
 		}
 	}
 	private var currentAppID = ""
+	private var currentAppURL: URL? = nil
 	@IBOutlet weak var manPathController: NSArrayController!
 	@IBOutlet weak var manPathTableView: NSTableView!
 	@IBOutlet weak var fontField: NSTextField!
@@ -175,6 +176,12 @@ class PrefPanelController: NSWindowController, NSFontChanging, @preconcurrency N
 	// MARK: DefaultManApp
 	
 	func setAppPopupToCurrent() {
+		if let appURL = currentAppURL,
+		   let urlIdx = appInfos.firstIndex(with: appURL),
+		   urlIdx < appPopup.numberOfItems {
+			appPopup.selectItem(at: urlIdx)
+			return
+		}
 		let currIndex = appInfos.firstIndex(withBundleID: currentAppID) ?? 0
 		
 		if currIndex < appPopup.numberOfItems {
@@ -226,6 +233,7 @@ class PrefPanelController: NSWindowController, NSFontChanging, @preconcurrency N
 		if let currSetURL, let newAppID = Bundle(url: currSetURL)?.bundleIdentifier {
 			var resetPopup: Bool = (currentAppID == "") //first time
 			
+			currentAppURL = currSetURL
 			currentAppID = newAppID
 			
 			if appInfos.firstIndex(with: currSetURL) == nil {
@@ -238,7 +246,9 @@ class PrefPanelController: NSWindowController, NSFontChanging, @preconcurrency N
 				setAppPopupToCurrent()
 			}
 		} else {
-			//Fallback to old way in case of failure.
+			// Fallback to old way in case of failure.
+			// Clear this!
+			currentAppURL = nil
 			var currSetID: String? = {
 				if let aSetID = LSCopyDefaultHandlerForURLScheme(URL_SCHEME as NSString)?.takeRetainedValue() {
 					return aSetID as String

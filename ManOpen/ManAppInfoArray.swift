@@ -105,13 +105,13 @@ final class ManAppInfoArray: Sequence {
 		return nil
 	}
 	
-	func firstIndex(with bundleID: URL?) -> Int? {
-		guard let bundleID else {
+	func firstIndex(with bundleURL: URL?) -> Int? {
+		guard let bundleURL else {
 			return nil
 		}
 		
 		for (i, obj) in allManViewerApps.enumerated() {
-			if obj.appURL == bundleID {
+			if obj.appURL == bundleURL {
 				return i
 			}
 		}
