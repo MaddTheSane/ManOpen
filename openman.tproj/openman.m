@@ -39,7 +39,7 @@ int main (int argc, char * const *argv)
         BOOL              forceToFront = YES;
         NSInteger         argIndex;
         char              c;
-        NSInteger         maxConnectTries = 8;
+        const NSInteger   maxConnectTries = 8;
         NSInteger         connectCount = 0;
         CFErrorRef        lsError = NULL;
         NSArray           *manOpenURLs;
@@ -80,7 +80,7 @@ int main (int argc, char * const *argv)
                 case '?':
                 default:
                     usage(argv[0]);
-                    return 0;
+                    return EXIT_SUCCESS;
             }
         }
         
@@ -88,7 +88,7 @@ int main (int argc, char * const *argv)
         {
             usage(argv[0]);
             //exit(0);
-            return 0;
+            return EXIT_SUCCESS;
         }
         
         if (optind < argc && !aproposMode)
@@ -126,7 +126,7 @@ int main (int argc, char * const *argv)
             
             if (optind >= argc && [files count] <= 0)
             {
-                return 0;
+                return EXIT_SUCCESS;
             }
         }
         
@@ -134,12 +134,12 @@ int main (int argc, char * const *argv)
         if (!manOpenURLs)
         {
             fprintf(stderr, "Cannot locate ManOpen.\n");
-            return 1;
+            return EXIT_FAILURE;
         }
         else if (![manOpenURLs.firstObject isKindOfClass:[NSURL class]])
         {
             fprintf(stderr, "Received an unknown object type from Launch Services.\n");
-            return 1;
+            return EXIT_FAILURE;
         }
         
         // Use NSWorkspace to launch ManOpen.
@@ -152,7 +152,7 @@ int main (int argc, char * const *argv)
                 if (!app)
                 {
                     fprintf(stderr, "Could not launch ManOpen\n");
-                    exit(1);
+                    exit(EXIT_FAILURE);
                 }
                 dispatch_semaphore_signal(launchLock);
             }];
@@ -163,7 +163,7 @@ int main (int argc, char * const *argv)
             if (![[NSWorkspace sharedWorkspace] launchApplicationAtURL:manOpenURLs.firstObject options:forceToFront ? 0UL : NSWorkspaceLaunchWithoutActivation configuration:@{} error:&launchErr])
             {
                 fprintf(stderr, "Could not launch ManOpen\n");
-                exit(1);
+                exit(EXIT_FAILURE);
             }
         }
         
@@ -177,7 +177,7 @@ int main (int argc, char * const *argv)
         if (remotePort == nil)
         {
             fprintf(stderr,"Could not open connection to ManOpen\n");
-            return 1;
+            return EXIT_FAILURE;
         }
         
         if (files.count) {
