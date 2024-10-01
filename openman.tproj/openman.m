@@ -53,10 +53,8 @@ int main (int argc, char * const *argv)
         CFMessagePortRef  remotePort;
         SInt32            status;
         
-        while ((c = getopt(argc,argv,"hbm:M:f:kaCcw")) != EOF)
-        {
-            switch(c)
-            {
+        while ((c = getopt(argc,argv,"hbm:M:f:kaCcw")) != EOF) {
+            switch(c) {
                 case 'm':
                 case 'M':
                     manPath = MakeNSStringFromPath(optarg);
@@ -84,15 +82,13 @@ int main (int argc, char * const *argv)
             }
         }
         
-        if (optind >= argc && [files count] <= 0)
-        {
+        if (optind >= argc && [files count] <= 0) {
             usage(argv[0]);
             //exit(0);
             return EXIT_SUCCESS;
         }
         
-        if (optind < argc && !aproposMode)
-        {
+        if (optind < argc && !aproposMode) {
             NSString *tmp = @(argv[optind]);
             
             if (isdigit(argv[optind][0])          ||
@@ -108,36 +104,29 @@ int main (int argc, char * const *argv)
                 [tmp isEqualToString:@"misc"]     ||
                 [tmp isEqualToString:@"admin"]    ||
                 [tmp isEqualToString:@"n"]        || // Tcl pages on >= Panther
-                [tmp isEqualToString:@"local"])
-            {
+                [tmp isEqualToString:@"local"]) {
                 section = tmp;
                 optind++;
             }
         }
         
-        if (optind >= argc)
-        {
-            if ([section length] > 0)
-            {
+        if (optind >= argc) {
+            if ([section length] > 0) {
                 /* MacOS X assumes it's a man page name */
                 section = nil;
                 optind--;
             }
             
-            if (optind >= argc && [files count] <= 0)
-            {
+            if (optind >= argc && [files count] <= 0) {
                 return EXIT_SUCCESS;
             }
         }
         
         // Use Launch Services to find ManOpen.
-        if (!manOpenURLs)
-        {
+        if (!manOpenURLs) {
             fprintf(stderr, "Cannot locate ManOpen.\n");
             return EXIT_FAILURE;
-        }
-        else if (![manOpenURLs.firstObject isKindOfClass:[NSURL class]])
-        {
+        } else if (![manOpenURLs.firstObject isKindOfClass:[NSURL class]]) {
             fprintf(stderr, "Received an unknown object type from Launch Services.\n");
             return EXIT_FAILURE;
         }
@@ -170,12 +159,12 @@ int main (int argc, char * const *argv)
         // Use a Mach port to open a connection; keep trying until one connects.
         do {
             remotePort = CFMessagePortCreateRemote(NULL, CFSTR("8D98N325TG.org.clindberg.ManOpen.MachIPC"));
-            if (!remotePort)
+            if (!remotePort) {
                 sleep(1);
+            }
         } while (remotePort == nil && connectCount++ < maxConnectTries);
         
-        if (remotePort == nil)
-        {
+        if (remotePort == nil) {
             fprintf(stderr,"Could not open connection to ManOpen\n");
             return EXIT_FAILURE;
         }
@@ -184,18 +173,19 @@ int main (int argc, char * const *argv)
             distributedDictionary[@"Files"] = files;
         }
         
-        if (manPath == nil && getenv("MANPATH") != NULL)
+        if (manPath == nil && getenv("MANPATH") != NULL) {
             manPath = MakeNSStringFromPath(getenv("MANPATH"));
+        }
         
-        for (argIndex = optind; argIndex < argc; argIndex++)
-        {
+        for (argIndex = optind; argIndex < argc; argIndex++) {
             NSString *currFile = MakeNSStringFromPath(argv[argIndex]);
             NSDictionary *nameAndSection;
             
-            if (section)
+            if (section) {
                 nameAndSection = @{@"Name": currFile, @"Section": section};
-            else
+            } else {
                 nameAndSection = @{@"Name": currFile};
+            }
             [namesAndSections addObject:nameAndSection];
         }
         if (aproposMode) {
