@@ -193,21 +193,11 @@ class ManDocumentController: NSDocumentController, NSApplicationDelegate {
 	func manFile(name: String, section: String? = nil, manPath: String? = nil) -> String? {
 		var command = manCommand(manPath: manPath)
 		command += " -w \(section ?? "") \(name)"
-		if let data = try? dataByExecutingCommand(command) {
-			if data.isEmpty {
-				return nil
-			}
-			
+		if let data = try? dataByExecutingCommand(command),
+		   !data.isEmpty,
+		   // 0A is == '\n'
+		   let len = data.firstIndex(where: { $0 == 0x0A }) {
 			let manager = FileManager.default
-			var len = data.count
-			
-			//TODO: use Swift equivalent.
-			data.withUnsafeBytes { urbp in
-				// 0A is == '\n'
-				if let newlinePtr = memchr(urbp.baseAddress, 0x0A, len) {
-					len = urbp.baseAddress!.distance(to: newlinePtr)
-				}
-			}
 			
 			let filename = data.withUnsafeBytes { ptr in
 				ptr.baseAddress!.withMemoryRebound(to: Int8.self, capacity: len) { ptr2 in
