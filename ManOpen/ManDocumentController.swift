@@ -745,36 +745,34 @@ class ManOpenURLHandlerCommand : NSScriptCommand {
 	* "printf(3) ls pwd".
 	*/
 	override func performDefaultImplementation() -> Any? {
-		guard let param = directParameter as? String else {
+		var pageNames = [String]()
+		
+		guard let param = directParameter as? String,
+			  let paramRange = param.range(of: URL_SCHEME_PREFIX, options: [.caseInsensitive, .anchored]) else {
 			return nil
 		}
 		
-		let paramRange = param.range(of: URL_SCHEME_PREFIX, options: [.caseInsensitive, .anchored])
-		var pageNames = [String]()
+		let path = param[paramRange.upperBound...]
+		let components = (path as NSString).pathComponents
 		
-		if let aRange = paramRange {
-			let path = param[aRange.upperBound...]
-			let components = (path as NSString).pathComponents
-			
-			var section: String? = nil
-			for name in components {
-				if name.isEmpty || name == "" || name == "/" {
-					continue
-				}
-				if isSectionWord(name) {
-					section = name
-				} else {
-					pageNames.append(name)
-					if let bSection = section {
-						pageNames.append("(\(bSection))")
-						section = nil
-					}
+		var section: String? = nil
+		for name in components {
+			if name.isEmpty || name == "" || name == "/" {
+				continue
+			}
+			if isSectionWord(name) {
+				section = name
+			} else {
+				pageNames.append(name)
+				if let bSection = section {
+					pageNames.append("(\(bSection))")
+					section = nil
 				}
 			}
-			
-			if pageNames.count > 0 {
-				(ManDocumentController.shared as! ManDocumentController).openString(pageNames.joined(separator: " "))
-			}
+		}
+		
+		if pageNames.count > 0 {
+			(ManDocumentController.shared as! ManDocumentController).openString(pageNames.joined(separator: " "))
 		}
 		
 		return nil
