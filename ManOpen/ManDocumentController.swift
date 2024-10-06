@@ -771,7 +771,7 @@ class ManOpenURLHandlerCommand : NSScriptCommand {
 			}
 		}
 		
-		if pageNames.count > 0 {
+		if !pageNames.isEmpty {
 			(ManDocumentController.shared as! ManDocumentController).openString(pageNames.joined(separator: " "))
 		}
 		

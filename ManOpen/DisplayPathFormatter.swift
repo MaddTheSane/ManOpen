@@ -26,7 +26,7 @@ final class DisplayPathFormatter: Formatter {
 			
 			return anew
 		}
-		return nil;
+		return nil
 	}
 	
 	override func getObjectValue(_ obj: AutoreleasingUnsafeMutablePointer<AnyObject?>?, for string: String, errorDescription error: AutoreleasingUnsafeMutablePointer<NSString?>?) -> Bool {
