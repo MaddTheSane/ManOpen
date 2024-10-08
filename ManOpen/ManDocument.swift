@@ -82,7 +82,7 @@ final class ManDocument: NSDocument, NSWindowDelegate {
 		}
 		
 		titleStringField.stringValue = shortTitle
-		textView.textStorage?.mutableString.setString(NSLocalizedString("Loading...", comment: "Before the man page is loaded"))
+		textView.textStorage?.mutableString.setString(NSLocalizedString("Loading...", comment: "Text shown before the man page is loaded"))
 		textView.backgroundColor = defaults.manBackgroundColor
 		textView.textColor = defaults.manTextColor
 		
@@ -123,7 +123,7 @@ final class ManDocument: NSDocument, NSWindowDelegate {
 		
 		if taskData == nil {
 			throw CocoaError(.fileReadUnknown, userInfo:
-				[NSLocalizedDescriptionKey: NSLocalizedString("Could not read manual data", comment: "Could not read manual data"),
+				[NSLocalizedFailureReasonErrorKey: NSLocalizedString("Could not read manual data", comment: "Could not read manual data"),
 				 NSURLErrorKey: url])
 		}
 	}
@@ -163,8 +163,8 @@ final class ManDocument: NSDocument, NSWindowDelegate {
 		}
 		
 		restoreData = [RestoreNameKey: name,
-			RestoreTitleKey: title,
-			RestoreSectionKey: section ?? ""]
+					  RestoreTitleKey: title,
+					RestoreSectionKey: section ?? ""]
 		
 		command += " " + name
 		
@@ -462,7 +462,8 @@ final class ManDocument: NSDocument, NSWindowDelegate {
 				
 				do {
 					try read(from: url, ofType: type)
-				} catch _ {
+				} catch {
+					coder.failWithError(error)
 				}
 			}
 			

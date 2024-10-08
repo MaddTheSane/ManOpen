@@ -412,10 +412,9 @@ class ManDocumentController: NSDocumentController, NSApplicationDelegate {
 	func openString(_ string: String) {
 		let words = getWordArray(string)
 		if words.count > 20 {
-			let locCount = NumberFormatter.localizedString(from: NSNumber(value: words.count), number: .decimal)
 			let alert = NSAlert()
 			alert.messageText = NSLocalizedString("Warning", comment: "Warning")
-			alert.informativeText = String.localizedStringWithFormat(NSLocalizedString("This will open approximately %@ windows!", comment: "This will open approximately (the number of) windows!"), locCount)
+			alert.informativeText = String.localizedStringWithFormat(NSLocalizedString("This will open approximately %ld windows!", comment: "This will open approximately (the number of) windows!"), words.count)
 			alert.addButton(withTitle: NSLocalizedString("Cancel", comment: "Cancel"))
 			alert.addButton(withTitle: NSLocalizedString("Continue", comment: "Continue"))
 			let aNum = alert.runModal()

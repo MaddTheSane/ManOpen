@@ -25,7 +25,7 @@
       "comment" : "Invalid document type"
     },
     "Loading..." : {
-      "comment" : "Before the man page is loaded",
+      "comment" : "Text shown before the man page is loaded",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -60,13 +60,13 @@
         }
       }
     },
-    "This will open approximately %@ windows!" : {
+    "This will open approximately %ld windows!" : {
       "comment" : "This will open approximately (the number of) windows!",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "This will open approximately %@ windows!"
+            "value" : "This will open approximately %ld windows!"
           }
         }
       }
