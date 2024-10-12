@@ -76,7 +76,7 @@ class PrefPanelController: NSWindowController, NSFontChanging, @preconcurrency N
 		}
 
 		
-		let linkDefaultColor = dataForColor(NSColor.systemBlue)
+		let linkDefaultColor = dataForColor(.linkColor)
 		let textDefaultColor = dataForColor(NSColor.textColor)
 		let bgDefaultColor = dataForColor(NSColor.textBackgroundColor)
 		

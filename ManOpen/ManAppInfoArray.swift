@@ -35,7 +35,7 @@ private func generateManInfos() -> [ManAppInfo] {
 }
 
 final class ManAppInfoArray: Sequence {
-	private(set) var allManViewerApps = generateManInfos()
+	private(set) var allManViewerApps: [ManAppInfo] = generateManInfos()
 	
 	init() {
 		sortApps()
@@ -96,13 +96,9 @@ final class ManAppInfoArray: Sequence {
 			return nil
 		}
 		
-		for (i, obj) in allManViewerApps.enumerated() {
-			if obj == bundleID {
-				return i
-			}
+		return allManViewerApps.firstIndex { mai in
+			return mai == bundleID
 		}
-		
-		return nil
 	}
 	
 	func firstIndex(with bundleURL: URL?) -> Int? {
