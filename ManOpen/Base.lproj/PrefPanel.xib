@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23094" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23504" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23094"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23504"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -115,6 +115,7 @@
                                         </button>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="422" secondAttribute="bottom" constant="20" symbolic="YES" id="115-vX-I5E"/>
                                         <constraint firstItem="2PI-yc-aQZ" firstAttribute="top" secondItem="T0b-VK-6e7" secondAttribute="bottom" constant="6" symbolic="YES" id="1UQ-AT-AgP"/>
                                         <constraint firstItem="T0b-VK-6e7" firstAttribute="leading" secondItem="rQm-B5-KBw" secondAttribute="leading" id="2o7-3q-K5Z"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="rQm-B5-KBw" secondAttribute="trailing" constant="20" symbolic="YES" id="7Tn-88-cv5"/>
@@ -278,6 +279,7 @@
                                         <constraint firstItem="441" firstAttribute="top" secondItem="GWR-Cs-FlN" secondAttribute="bottom" constant="13" id="Wpc-JN-XyN"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="456" secondAttribute="trailing" constant="20" symbolic="YES" id="YZW-h5-RxC"/>
                                         <constraint firstItem="439" firstAttribute="top" secondItem="447" secondAttribute="bottom" constant="8" symbolic="YES" id="Yyj-Rl-sdf"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="455" secondAttribute="bottom" constant="20" symbolic="YES" id="clC-rw-uFq"/>
                                         <constraint firstItem="455" firstAttribute="top" secondItem="452" secondAttribute="bottom" constant="1" id="doQ-ed-au8"/>
                                         <constraint firstItem="455" firstAttribute="width" secondItem="449" secondAttribute="width" id="ede-Oe-Jay"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="48x-H5-wIz" secondAttribute="trailing" constant="20" symbolic="YES" id="elv-cu-AWx"/>
