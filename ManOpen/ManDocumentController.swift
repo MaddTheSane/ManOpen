@@ -63,13 +63,13 @@ class ManDocumentController: NSDocumentController, NSApplicationDelegate {
 	private var nibObjects = [AnyObject]()
 	private var messagePort: CFMessagePort?
 	
-	@objc func ensureActive() {
+	func ensureActive() {
 		if !NSApplication.shared.isActive {
 			NSApplication.shared.activate(ignoringOtherApps: true)
 		}
 	}
 	
-	@objc func openApropos(_ apropos: String, manPath: String? = nil, forceToFront force: Bool = true) {
+	func openApropos(_ apropos: String, manPath: String? = nil, forceToFront force: Bool = true) {
 		if force {
 			ensureActive()
 		}
@@ -213,13 +213,15 @@ class ManDocumentController: NSDocumentController, NSApplicationDelegate {
 	
 	func type(from url: URL) -> String? {
 		let manager = FileManager.default
+		var urlSym = url.resolvingSymlinksInPath()
+		urlSym.standardize()
 		var catType = "cat"
 		var manType = "man"
 		var len: UInt64
-		if let theAttribs = try? url.resolvingSymlinksInPath().resourceValues(forKeys: [.fileSizeKey]),
+		if let theAttribs = try? urlSym.resourceValues(forKeys: [.fileSizeKey]),
 			let aSize = theAttribs.fileSize {
 			len = UInt64(aSize)
-		} else if let anAttrib = try? manager.attributesOfItem(atPath: url.resolvingSymlinksInPath().path) {
+		} else if let anAttrib = try? manager.attributesOfItem(atPath: urlSym.path) {
 			if let tmplen = anAttrib[FileAttributeKey.size] as? NSNumber {
 				len = tmplen.uint64Value
 			} else {
@@ -277,7 +279,7 @@ class ManDocumentController: NSDocumentController, NSApplicationDelegate {
 	/// completely to avoid that chance, and instead determine the type of
 	/// the file based on contents.
 	override func openDocument(withContentsOf url: URL, display displayDocument: Bool, completionHandler: (@escaping (NSDocument?, Bool, Error?) -> Void)) {
-		let standardizedURL = url.standardized
+		let standardizedURL = url.resolvingSymlinksInPath().standardized
 		var error: Error? = nil
 		let numDocuments = documents.count
 		
@@ -347,7 +349,7 @@ class ManDocumentController: NSDocumentController, NSApplicationDelegate {
 	}
 	
 	/// A parallel for `-openDocumentWithContentsOfFile:` for a specific man page
-	@discardableResult @objc
+	@discardableResult
 	func openDocument(name: String, section: String? = nil, manPath: String) -> ManDocument? {
 		var title = name
 		if let section, section.isEmpty == false {
@@ -373,7 +375,7 @@ class ManDocumentController: NSDocumentController, NSApplicationDelegate {
 		return document
 	}
 	
-	@discardableResult @objc
+	@discardableResult
 	func openAproposDocument(_ apropos: String, manPath: String) -> AproposDocument? {
 		let title = "Apropos \(apropos)"
 		var document = self.document(forTitle: title) as? AproposDocument
@@ -510,7 +512,7 @@ class ManDocumentController: NSDocumentController, NSApplicationDelegate {
 		// Set ourselves up for connections from the command line tool. Originally, this app used DO, but DO is deprecated, and even if it wasn't, it doesn't work in the sandbox. But Mach ports work, so we use that instead.
 		// If anyone other than me is building this, then you will need to replace my developer group ID with your own below. And you'll probably need to make the same change in the app group in the entitlements as well.
 		context.info = Unmanaged.passUnretained(self).toOpaque()
-		messagePort = CFMessagePortCreateLocal(nil, "8D98N325TG.org.clindberg.ManOpen.MachIPC" as CFString, { port, messageID, data, context -> Unmanaged<CFData>? in
+		messagePort = CFMessagePortCreateLocal(kCFAllocatorDefault, "8D98N325TG.org.clindberg.ManOpen.MachIPC" as CFString, { port, messageID, data, context -> Unmanaged<CFData>? in
 			guard let context, let data = data as Data? else {
 				return nil
 			}
@@ -670,7 +672,7 @@ class ManDocumentController: NSDocumentController, NSApplicationDelegate {
 		   let fileArray = pboard.readObjects(forClasses: [NSURL.self], options: [.urlReadingFileURLsOnly: true]) as? [URL] {
 			for tmpPath in fileArray {
 				openDocument(withContentsOf: tmpPath, display: true, completionHandler: { (doc, display, error) in
-					//Swift.print("document: '\(String(describing: doc))', Display: \(display), Error '\(String(describing: error))'")
+					Swift.print("document: '\(String(describing: doc))', Display: \(display), Error '\(String(describing: error))'")
 				})
 			}
 		}
@@ -693,8 +695,7 @@ class ManDocumentController: NSDocumentController, NSApplicationDelegate {
 	}
 }
 
-private func isSectionWord(_ word: String) -> Bool
-{
+private func isSectionWord(_ word: String) -> Bool {
 	if word.isEmpty {
 		return false
 	}
