@@ -10,7 +10,6 @@ import Cocoa
 import CoreServices
 
 private func generateManInfos() -> [ManAppInfo] {
-	var anAppInfo = [ManAppInfo]()
 	var components = URLComponents()
 	components.scheme = URL_SCHEME
 	components.host = "man"
@@ -20,18 +19,13 @@ private func generateManInfos() -> [ManAppInfo] {
 	} else {
 		allBundleURLs = LSCopyApplicationURLsForURL(components.url! as NSURL, .viewer)?.takeRetainedValue() as? [URL]
 	}
-	guard let allBundleURLs else {
-		return []
-	}
-	anAppInfo.reserveCapacity(allBundleURLs.count)
-	
-	for bundleURL in allBundleURLs {
-		if let mai = ManAppInfo(url: bundleURL) {
-			anAppInfo.append(mai)
+	if let allBundleURLs {
+		return allBundleURLs.compactMap { bundleURL in
+			return ManAppInfo(url: bundleURL)
 		}
 	}
 	
-	return anAppInfo
+	return []
 }
 
 final class ManAppInfoArray: Sequence {
