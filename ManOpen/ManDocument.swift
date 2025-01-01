@@ -19,6 +19,10 @@ private let RestoreFileTypeKey   = "DocType"
 
 private let ManWindowSizeKey = "ManWindowSize"
 
+private let manTextColorKVOKey = "values."+manTextColorKey
+private let manLinkColorKVOKey = "values."+manLinkColorKey
+private let manBackgroundColorKVOKey = "values."+manBackgroundColorKey
+
 private var filterCommand: String {
 	let defaults = UserDefaults.standard
 	
@@ -92,6 +96,35 @@ final class ManDocument: NSDocument, NSWindowDelegate {
 		
 		textView.window?.makeFirstResponder(textView)
 		textView.window?.delegate = self
+		NSUserDefaultsController.shared.addObserver(self, forKeyPath: manTextColorKVOKey, options: [.new], context: nil)
+		NSUserDefaultsController.shared.addObserver(self, forKeyPath: manLinkColorKVOKey, options: [.new], context: nil)
+		NSUserDefaultsController.shared.addObserver(self, forKeyPath: manBackgroundColorKVOKey, options: [.new], context: nil)
+	}
+	
+	deinit {
+		NSUserDefaultsController.shared.removeObserver(self, forKeyPath: manTextColorKVOKey)
+		NSUserDefaultsController.shared.removeObserver(self, forKeyPath: manLinkColorKVOKey)
+		NSUserDefaultsController.shared.removeObserver(self, forKeyPath: manBackgroundColorKVOKey)
+	}
+	
+	override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+		guard let keyPath else { return }
+		
+		switch keyPath {
+		case manTextColorKVOKey, manLinkColorKVOKey, manBackgroundColorKVOKey:
+			let defaults = NSUserDefaultsController.shared.defaults
+			let linkColor = defaults.manLinkColor
+			let textColor = defaults.manTextColor
+			let backgroundColor = defaults.manBackgroundColor
+
+			textView.backgroundColor = backgroundColor
+			textView.linkTextAttributes = [.foregroundColor: linkColor,
+										   .underlineStyle: NSUnderlineStyle.single.rawValue]
+			textView.textColor = textColor
+			
+		default:
+			super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+		}
 	}
 	
 	override func read(from url: URL, ofType typeName: String) throws {
@@ -285,6 +318,8 @@ final class ManDocument: NSDocument, NSWindowDelegate {
 		textView.layoutManager?.replaceTextStorage(storage)
 		textView.window?.invalidateCursorRects(for: textView)
 		textView.backgroundColor = backgroundColor
+		textView.linkTextAttributes = [.foregroundColor: linkColor,
+									   .underlineStyle: NSUnderlineStyle.single.rawValue]
 		setupSectionPopup()
 		
 		/*
