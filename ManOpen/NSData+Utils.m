@@ -62,24 +62,6 @@
     return NO;
 }
 
-- (BOOL)hasPrefixBytes:(const void *)bytes length:(NSUInteger)len
-{
-    if ([self length] < len) return NO;
-    return (memcmp([self bytes], bytes, len) == 0);
-}
-
-- (BOOL)isRTFData
-{
-    static const char header[] = "{\\rtf";
-    return [self hasPrefixBytes:header length:strlen(header)];
-}
-
-- (BOOL)isGzipData
-{
-    return ([self hasPrefixBytes:"\037\235" length:2] ||    // compress(1) header
-            [self hasPrefixBytes:"\037\213" length:2]);     // gzip(1) header
-}
-
 /* Very rough check -- see if more than a third of the first 100 bytes have the high bit set */
 - (BOOL)isBinaryData
 {
