@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import FoundationAdditions
 #if USE_CGCONTEXT_FOR_PRINTING
 import CoreText
 #endif
@@ -105,7 +104,7 @@ class ManTextView: NSTextView {
 			context.setFont(CGFont(font.fontName as NSString)!)
 			context.setFontSize(font.pointSize)
 			let ctfont = CTFontCreateWithName(font.fontName as NSString, font.pointSize, nil)
-			let ctDict: [NSAttributedStringKey: Any] = [NSAttributedStringKey(kCTFontAttributeName as String): ctfont]
+			let ctDict: [NSAttributedString.Key: Any] = [NSAttributedString.Key(kCTFontAttributeName as String): ctfont]
 			let attrStr = NSAttributedString(string: pageString, attributes: ctDict)
 			context.textPosition = point
 			let line = CTLineCreateWithAttributedString(attrStr)
