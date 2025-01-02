@@ -62,20 +62,6 @@
     return NO;
 }
 
-/* Very rough check -- see if more than a third of the first 100 bytes have the high bit set */
-- (BOOL)isBinaryData
-{
-    NSUInteger checklen = MIN(100, [self length]);
-    NSUInteger badByteCount = 0;
-    unsigned const char *bytes = [self bytes];
-
-    if (checklen == 0) return NO;
-    for (NSUInteger i=0; i<checklen; i++, bytes++)
-        if (*bytes == '\0' || !isascii((int)*bytes)) badByteCount++;
-
-    return (badByteCount > 0) && (checklen / badByteCount) <= 2;
-}
-
 @end
 
 @implementation NSFileHandle (Utils)

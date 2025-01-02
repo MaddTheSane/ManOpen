@@ -7,8 +7,6 @@
  * Derived from logic in FreeBSD's <b>file(1)</b> command.
  */
 @property (getter=isNroffData, readonly) BOOL nroffData;
-//! Very rough check -- see if more than a third of the first 100 bytes have the high bit set
-@property (getter=isBinaryData, readonly) BOOL binaryData;
 
 @end
 
