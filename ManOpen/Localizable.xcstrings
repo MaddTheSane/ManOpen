@@ -13,16 +13,48 @@
       }
     },
     "Cancel" : {
-      "comment" : "Cancel"
+      "comment" : "Cancel",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        }
+      }
     },
     "Continue" : {
-      "comment" : "Continue"
+      "comment" : "Continue",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue"
+          }
+        }
+      }
     },
     "Could not read manual data" : {
-      "comment" : "Could not read manual data"
+      "comment" : "Could not read manual data",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Could not read manual data"
+          }
+        }
+      }
     },
     "Invalid document type" : {
-      "comment" : "Invalid document type"
+      "comment" : "Invalid document type",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invalid document type"
+          }
+        }
+      }
     },
     "Loading..." : {
       "comment" : "Text shown before the man page is loaded",
@@ -47,7 +79,15 @@
       }
     },
     "Nothing found" : {
-      "comment" : "Nothing found"
+      "comment" : "Nothing found",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nothing found"
+          }
+        }
+      }
     },
     "Select..." : {
       "comment" : "Select...",
@@ -72,7 +112,15 @@
       }
     },
     "Warning" : {
-      "comment" : "Warning"
+      "comment" : "Warning",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warning"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

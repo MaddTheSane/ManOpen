@@ -60,7 +60,6 @@
       }
     },
     "man" : {
-      "comment" : "Localizations for the type names so that RCDefaultApp shows them well",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
