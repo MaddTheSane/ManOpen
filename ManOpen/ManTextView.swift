@@ -71,7 +71,6 @@ class ManTextView: NSTextView {
 		}
 	}
 	
-	
 	/// Draw page numbers when printing. Under early versions of MacOS X... the normal
 	/// NSString drawing methods don't work in the context of this method. So, I fell back on
 	/// CoreGraphics primitives, which did. However, I'm now just supporting Tiger (10.4) and up,
@@ -103,8 +102,7 @@ class ManTextView: NSTextView {
 						
 			context.setFont(CGFont(font.fontName as NSString)!)
 			context.setFontSize(font.pointSize)
-			let ctfont = CTFontCreateWithName(font.fontName as NSString, font.pointSize, nil)
-			let ctDict: [NSAttributedString.Key: Any] = [NSAttributedString.Key(kCTFontAttributeName as String): ctfont]
+			let ctDict: [NSAttributedString.Key: Any] = [NSAttributedString.Key(kCTFontAttributeName as String): font as CTFont]
 			let attrStr = NSAttributedString(string: pageString, attributes: ctDict)
 			context.textPosition = point
 			let line = CTLineCreateWithAttributedString(attrStr)
@@ -120,4 +118,3 @@ class ManTextView: NSTextView {
 		#endif
 	}
 }
-
