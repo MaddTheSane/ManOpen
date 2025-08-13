@@ -72,11 +72,11 @@ final class ManAppInfo: Hashable, CustomDebugStringConvertible, CustomStringConv
 	func hash(into hasher: inout Hasher) {
 		guard let ident = try? appURL.resourceValues(forKeys: [.fileResourceIdentifierKey]).fileResourceIdentifier,
 			  // sssh... fileResourceIdentifiers are secretly NSData objects
-			  let ident2 = ident as? Data else {
+			  let ident2 = ident as? NSData else {
 			hasher.combine(bundleID.lowercased())
 			return
 		}
-		hasher.combine(ident2)
+		hasher.combine(ident2 as Data)
 	}
 	
 	func compare(_ string: ManAppInfo) -> ComparisonResult {
