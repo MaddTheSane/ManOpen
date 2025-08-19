@@ -88,7 +88,7 @@ extension UserDefaults {
 	
 	var manFont: NSFont {
 		if let fontString: String = self[manFontKey],
-			let spaceRange = fontString.range(of: " ") {
+		   let spaceRange = fontString.range(of: " ") {
 			let sizeStr = fontString[fontString.startIndex..<spaceRange.lowerBound]
 			if let size1 = CGFloat.NativeType(sizeStr) {
 				let size = CGFloat(floatLiteral: size1)

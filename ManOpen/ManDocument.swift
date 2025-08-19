@@ -485,13 +485,13 @@ final class ManDocument: NSDocument, NSWindowDelegate {
 		
 		if let restoreInfo = coder.decodeObject(of: [NSString.self, NSNumber.self, NSDictionary.self, NSURL.self], forKey: RestoreWindowDictKey) as? [String: Any] {
 			if let aRestoreName = restoreInfo[RestoreNameKey] as? String,
-				let title = restoreInfo[RestoreTitleKey] as? String {
+			   let title = restoreInfo[RestoreTitleKey] as? String {
 				let section = restoreInfo[RestoreSectionKey] as? String
 				let manPath = UserDefaults.standard.manPath
 				
 				loadDocument(name: aRestoreName, section: section, manPath: manPath, title: title)
 				/* Usually, URL-backed documents have been automatically restored already
-				(the copyURL would be set), but just in case... */
+				 (the copyURL would be set), but just in case... */
 			} else if let url = restoreInfo[RestoreFileURLKey] as? URL, copyURL == nil,
 				let type = restoreInfo[RestoreFileTypeKey] as? String {
 				

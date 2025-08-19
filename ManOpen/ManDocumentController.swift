@@ -47,7 +47,7 @@ func escapePath(_ path: String, addSurroundingQuotes: Bool = false) -> String {
 		modPath = "'\(modPath)'"
 	}
 	
-	return modPath;
+	return modPath
 }
 
 @main
