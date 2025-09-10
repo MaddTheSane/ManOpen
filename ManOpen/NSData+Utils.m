@@ -23,8 +23,7 @@
     while (isspace(*ptr)) ptr++;
 
     /* Some X11R6 pages have a weird #pragma line at the start */
-    if (MATCH("#pragma"))
-    {
+    if (MATCH("#pragma")) {
         const char *nextline = strchr(ptr, '\n');
         if (nextline != NULL) {
             ptr = nextline;
@@ -37,20 +36,19 @@
 
 
     /* Try for some common prefixes: .\", '\", '.\", \", and .\<sp> */
-    if (MATCH(".\\\""))  return YES;
-    if (MATCH("'\\\""))  return YES;
-    if (MATCH("'.\\\"")) return YES;
-    if (MATCH("\\\""))   return YES;
-    if (MATCH(".\\ "))   return YES;
-    if (MATCH("\\.\""))  return YES;  // found this on a joke man page
-    if (MATCH("\\\n.\\\" "))  return YES;  // found this on macptopbm man page
+    if (MATCH(".\\\""))         return YES;
+    if (MATCH("'\\\""))         return YES;
+    if (MATCH("'.\\\""))        return YES;
+    if (MATCH("\\\""))          return YES;
+    if (MATCH(".\\ "))          return YES;
+    if (MATCH("\\.\""))         return YES;  // found this on a joke man page
+    if (MATCH("\\\n.\\\" "))    return YES;  // found this on macptopbm man page
 
     /*
      * Now check for .[letter][letter], and .\" again.  In either case,
      * allow spaces after the '.'
      */
-    if (*ptr == '.')
-    {
+    if (*ptr == '.') {
         /* skip over '.' and whitespace */
         ptr++;
         while (isspace(*ptr)) ptr++;
