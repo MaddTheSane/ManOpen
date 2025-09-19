@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23504" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="24127" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24127"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -70,7 +70,7 @@
                 <menuItem title="File" id="45">
                     <menu key="submenu" title="File" id="49">
                         <items>
-                            <menuItem title="Open Title..." keyEquivalent="o" id="44">
+                            <menuItem title="Open Title..." secondaryImage="arrow.up.right" catalog="system" keyEquivalent="o" id="44">
                                 <connections>
                                     <action selector="openTextPanel:" target="54" id="69"/>
                                 </connections>
@@ -202,7 +202,7 @@
                                     <action selector="copy:" target="-1" id="31"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Copy URL" keyEquivalent="C" id="396">
+                            <menuItem title="Copy URL" secondaryImage="document.on.document" catalog="system" keyEquivalent="C" id="396">
                                 <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                 <connections>
                                     <action selector="copyURL:" target="-1" id="397"/>
@@ -306,4 +306,8 @@
         <customObject id="54" userLabel="ManDocumentController" customClass="ManDocumentController" customModule="ManOpen" customModuleProvider="target"/>
         <customObject id="199" userLabel="Font Manager" customClass="NSFontManager"/>
     </objects>
+    <resources>
+        <image name="arrow.up.right" catalog="system" width="13" height="12"/>
+        <image name="document.on.document" catalog="system" width="16" height="18"/>
+    </resources>
 </document>

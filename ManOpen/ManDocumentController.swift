@@ -147,13 +147,13 @@ class ManDocumentController: NSDocumentController, NSApplicationDelegate {
 		var command = MAN_BINARY
 		
 		if let manPath, !manPath.isEmpty {
-			command += " -M '\(escapePath(manPath))'"
+			command += String(format: MANPATH_FORMAT, escapePath(manPath))
 		}
 		
 		return command
 	}
 	
-	func dataByExecutingCommand(_ command: String, maxLength: Int = 0, extraEnv: Dictionary<String, String>? = nil) throws -> Data {
+	func dataByExecutingCommand(_ command: String, maxLength: Int = 0, extraEnv: [String: String]? = nil) throws -> Data {
 		let pipe = Pipe()
 		let task = Process()
 		var output: Data
@@ -164,12 +164,12 @@ class ManDocumentController: NSDocumentController, NSApplicationDelegate {
 			task.environment = environment
 		}
 		
-		task.launchPath = "/bin/sh"
+		task.executableURL = URL(fileURLWithPath: "/bin/sh")
 		task.arguments = ["-c", command]
 		task.standardOutput = pipe
 		task.standardError = FileHandle.nullDevice
 		task.qualityOfService = .userInitiated
-		task.launch()
+		try task.run()
 		
 		if maxLength > 0 {
 			if #available(macOS 10.15.4, *) {

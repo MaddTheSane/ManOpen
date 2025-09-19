@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="24118.1" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="24127" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24118.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24127"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -21,14 +21,14 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="141" y="361" width="605" height="454"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1512" height="944"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1512" height="948"/>
             <value key="minSize" type="size" width="302" height="218"/>
             <visualEffectView key="contentView" blendingMode="behindWindow" material="HUDWindow" state="followsWindowActiveState" id="9">
                 <rect key="frame" x="0.0" y="0.0" width="605" height="454"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <textField wantsLayer="YES" focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="10">
-                        <rect key="frame" x="74" y="400" width="390" height="21"/>
+                    <textField wantsLayer="YES" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="10">
+                        <rect key="frame" x="74" y="400" width="376" height="21"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" alignment="left" title="Title" id="62">
                             <font key="font" metaFont="system" size="18"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -41,10 +41,10 @@
                             <constraint firstAttribute="width" constant="48" id="cUc-92-zE4"/>
                             <constraint firstAttribute="height" constant="48" id="zCf-Y2-x6P"/>
                         </constraints>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSApplicationIcon" id="63"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="ManOpen" id="63"/>
                     </imageView>
                     <button toolTip=" Open selection " translatesAutoresizingMaskIntoConstraints="NO" id="25">
-                        <rect key="frame" x="542" y="390" width="46" height="47"/>
+                        <rect key="frame" x="545" y="394" width="40" height="40"/>
                         <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" image="helpQMark" imagePosition="only" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="64">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -87,7 +87,7 @@
                         </scroller>
                     </scrollView>
                     <popUpButton horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="45">
-                        <rect key="frame" x="466" y="402" width="75" height="22"/>
+                        <rect key="frame" x="456" y="404" width="81" height="20"/>
                         <popUpButtonCell key="cell" type="push" title="Section:" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="clipping" borderStyle="border" inset="2" pullsDown="YES" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="49" id="65">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="smallSystem"/>
@@ -131,7 +131,7 @@
         </window>
     </objects>
     <resources>
-        <image name="NSApplicationIcon" width="32" height="32"/>
+        <image name="ManOpen" width="128" height="128"/>
         <image name="helpQMark" width="40" height="40"/>
     </resources>
 </document>
