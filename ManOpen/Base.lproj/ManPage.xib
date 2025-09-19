@@ -27,7 +27,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="605" height="454"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <textField wantsLayer="YES" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="10">
+                    <textField wantsLayer="YES" focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="10">
                         <rect key="frame" x="74" y="400" width="376" height="21"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" alignment="left" title="Title" id="62">
                             <font key="font" metaFont="system" size="18"/>
@@ -41,7 +41,7 @@
                             <constraint firstAttribute="width" constant="48" id="cUc-92-zE4"/>
                             <constraint firstAttribute="height" constant="48" id="zCf-Y2-x6P"/>
                         </constraints>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="ManOpen" id="63"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="ManOpen-ns" id="63"/>
                     </imageView>
                     <button toolTip=" Open selection " translatesAutoresizingMaskIntoConstraints="NO" id="25">
                         <rect key="frame" x="545" y="394" width="40" height="40"/>
@@ -131,7 +131,7 @@
         </window>
     </objects>
     <resources>
-        <image name="ManOpen" width="128" height="128"/>
+        <image name="ManOpen-ns" width="48" height="48"/>
         <image name="helpQMark" width="40" height="40"/>
     </resources>
 </document>

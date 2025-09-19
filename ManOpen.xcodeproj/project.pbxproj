@@ -22,6 +22,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		55101AD12E7D3674004DFE2C /* ManOpen-glass.icon in Resources */ = {isa = PBXBuildFile; fileRef = 55101AD02E7D3674004DFE2C /* ManOpen-glass.icon */; };
 		5516ECE81A7CA21200760214 /* ManTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5516ECE71A7CA21200760214 /* ManTextView.swift */; };
 		55182E0D19C0B8E30016128A /* PrefPanelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C0CF4319BE07E9009C50D7 /* PrefPanelController.swift */; };
 		55182E0E19C0BAC10016128A /* AproposDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553A5B2019BFE7E3003D74A9 /* AproposDocument.swift */; };
@@ -275,6 +276,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		55101AD02E7D3674004DFE2C /* ManOpen-glass.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = "ManOpen-glass.icon"; sourceTree = "<group>"; };
 		5516ECE71A7CA21200760214 /* ManTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManTextView.swift; sourceTree = "<group>"; };
 		5527B64523DE733D00DF1BB2 /* ManOpen.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ManOpen.sdef; sourceTree = "<group>"; };
 		553A5B2019BFE7E3003D74A9 /* AproposDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AproposDocument.swift; sourceTree = "<group>"; };
@@ -376,6 +378,7 @@
 				55C0CF1A19BE07E8009C50D7 /* DocController.xib */,
 				5553E1FE1881F2C2003C2DBF /* Help.rtf */,
 				5553E21E1881F83E003C2DBF /* Images.xcassets */,
+				55101AD02E7D3674004DFE2C /* ManOpen-glass.icon */,
 				55C0CF3519BE07E9009C50D7 /* Info-ManOpen.plist */,
 				559147902B5666080084B53A /* InfoPlist.xcstrings */,
 				559147922B5666080084B53A /* Localizable.xcstrings */,
@@ -861,6 +864,7 @@
 				55C0CF4619BE07E9009C50D7 /* DocController.xib in Resources */,
 				55C0CF4919BE07E9009C50D7 /* PrefPanel.xib in Resources */,
 				559147932B5666080084B53A /* Localizable.xcstrings in Resources */,
+				55101AD12E7D3674004DFE2C /* ManOpen-glass.icon in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1008,7 +1012,7 @@
 		55C0CF0E19BE04D8009C50D7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = ManOpen;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "ManOpen-glass";
 				CODE_SIGN_IDENTITY = "-";
 				CURRENT_PROJECT_VERSION = 3.1.2;
 				DEAD_CODE_STRIPPING = YES;
@@ -1041,7 +1045,7 @@
 		55C0CF0F19BE04D8009C50D7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = ManOpen;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "ManOpen-glass";
 				CODE_SIGN_IDENTITY = "-";
 				CURRENT_PROJECT_VERSION = 3.1.2;
 				DEAD_CODE_STRIPPING = YES;
